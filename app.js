@@ -6,6 +6,7 @@ const logger = require("morgan");
 const compression = require("compression");
 const helmet = require("helmet");
 const RateLimit = require("express-rate-limit");
+const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -29,6 +30,15 @@ app.use(
     },
   })
 );
+
+// Database connection
+mongoose.set("strictQuery", false);
+const mongoDB = process.env.MONGODB_URI || process.env.DEV_DB_URL;
+
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
 
 app.use(compression()); // Compress all routes
 
