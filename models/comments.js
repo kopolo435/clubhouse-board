@@ -3,19 +3,18 @@ const { DateTime } = require("luxon");
 
 const { Schema } = mongoose;
 
-const PostSchema = new Schema({
-  title: { type: String, required: true, maxLength: 30 },
+const CommentsSchema = new Schema({
   content: { type: String, required: true },
-  img_url: { type: String },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  post: { type: Schema.Types.ObjectId, ref: "Post", required: true },
   points: { type: Number, default: 1 },
   date: { type: Date, default: Date.now },
 });
 
-PostSchema.virtual("formatted_date").get(function () {
+CommentsSchema.virtual("formatted_date").get(function () {
   return DateTime.fromJSDate(this.date, { zone: "utc" }).toLocaleString(
     DateTime.DATE_MED
   );
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Comment", CommentsSchema);
