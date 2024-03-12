@@ -2,9 +2,18 @@ const User = require("../models/user");
 
 module.exports.isEmailInUse = async function isEmailInUse(value) {
   const user = await User.findOne({ email: value }).exec();
-  return !user;
+  if (user) {
+    throw new Error("Erorr, el correo ingresado ya se encuentra en uso");
+  }
 };
 
 module.exports.isPasswordEqual = function isPasswordEqual(value, { req }) {
   return value === req.body.password;
+};
+
+module.exports.isUsernameInUse = async function isUsernameInUse(value) {
+  const user = await User.findOne({ username: value }).exec();
+  if (user) {
+    throw new Error("Error, el nombre de usuario ya se encuentra en uso");
+  }
 };
