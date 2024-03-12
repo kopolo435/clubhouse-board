@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <form action="" method="post">
+      <%- include("textInput", {type:"text", label:"Nombre", name:"first_name",
+      error:errors.first_name, value:formValues.first_name, placeholder:"Nombre"}) %>
+
+      <%-include("textInput", {type:"text", label:"Apellido", name:"last_name",
+      error:errors.last_name, value:formValues.last_name, placeholder:"Apellido"}) %>
+
+      <%-include("textInput", {type:"email", label:"Correo", name:"email",
+      error:errors.email, formValues, value:formValues.email, placeholder:"correo@gmail.com"}) %>
+
+      <%-include("textInput", {type:"text", label:"Nombre de usuario",
+      name:"username", error:errors.username, value:formValues.username,
+      placeholder:"manzanita123"}) %> 
+
+      <%-include("textInput", {type:"password",label:"Contraseña",
+      name:"password",error:errors.password, value:formValues.password,
+      placeholder:""}) %> 
+
+      <%-include("textInput",{type:"password",label:"Confirmar contraseña", name:"passwordConfirmation",
+       error:errors.passwordConfirmation, value:formValues.passwordConfirmation, placeholder:""}) %> 
+    <button type="submit">Registrarse</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<% if (typeof error === "undefined") { %>
+<div class="textInput">
+  <label class="textLabel" for="<%= name %>">
+    <%= label %> 
+    <input 
+    type="<%= type %>" 
+    id="<%= name %>" 
+    name="<%= name %>"
+    placeholder="<%= placeholder %>" 
+    required value="<%= !value ? "" : value  %>" />
+  </label>
+</div>
+<% }else{ %>
+<div class="textInput invalid">
+  <label class="textLabel" for="<%= name %>">
+    <%= label %> 
+    <input 
+    type="<%= type %>" 
+    id="<%= name %>" 
+    name="<%= name %>"
+    placeholder="<%= placeholder %>" 
+    required value="<%= !value ? "" : value  %>" />
+  </label>
+  <p class="errorText"><%= error.msg %></p>
+</div>
+<% } %>
