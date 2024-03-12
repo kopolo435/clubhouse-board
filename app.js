@@ -7,9 +7,11 @@ const compression = require("compression");
 const helmet = require("helmet");
 const RateLimit = require("express-rate-limit");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const accountRouter = require("./routes/account");
 
 const app = express();
 
@@ -54,6 +56,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/account", accountRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
