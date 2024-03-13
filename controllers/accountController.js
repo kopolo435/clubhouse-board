@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const passport = require("passport");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
@@ -89,5 +90,36 @@ module.exports.sign_up_post = [
         res.redirect("/account/log_in");
       });
     }
+  }),
+];
+
+module.exports.sign_in_get = asyncHandler(async (req, res, next) => {
+  res.render("sign_in", { user: {}, errors: {} });
+});
+
+module.exports.sign_in_post = [
+  body("username")
+    .trim()
+    .escape()
+    .isLength({ min: 1 })
+    .withMessage("Debe introducir su nombre de usuario")
+    .isAlphanumeric("en-US")
+    .withMessage("Error, ingreso caracteres invalidos"),
+
+  body("password")
+    .isLength({ min: 1 })
+    .withMessage("Debe ingresar la contraseña"),
+  function inputsValid(req, res, next) {
+    const errors = validationResult(req);
+    const user = { username: req.body.username, password: req.body.password };
+    if (!errors.isEmpty()) {
+      res.render("sign_in", { user, errors: errors.mapped() });
+    } else {
+      next();
+    }
+  },
+  passport.authenticate("local", {
+    successRedirect: "/account/protected",
+    failureRedirect: "/logged",
   }),
 ];
