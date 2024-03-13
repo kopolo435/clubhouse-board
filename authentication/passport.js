@@ -5,11 +5,11 @@ const User = require("../models/user");
 
 const verifyFunction = async function (username, password, done) {
   try {
-    const user = await User.find({ username }).exec();
+    const user = await User.findOne({ username }).exec();
     if (!user) {
       return done(null, false);
     }
-    const match = bcrypt.compare(password, user.password);
+    const match = await bcrypt.compare(password, user.password);
     if (!match) {
       return done(null, false);
     }
