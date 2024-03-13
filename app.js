@@ -3,10 +3,13 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const passport = require("passport");
 const compression = require("compression");
 const helmet = require("helmet");
 const RateLimit = require("express-rate-limit");
 const mongoose = require("mongoose");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 require("dotenv").config();
 
 const indexRouter = require("./routes/index");
@@ -41,6 +44,29 @@ main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
 }
+
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+      client: mongoose.connection.getClient(),
+    }),
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, // Equals 1 day (1 day * 24 hr/1 day * 60
+    },
+  })
+);
+
+/**
+ * -------------- PASSPORT AUTHENTICATION ----------------
+ */
+
+require("./authentication/passport");
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(compression()); // Compress all routes
 
