@@ -25,7 +25,9 @@
     "http-errors": "~1.6.3",
     "luxon": "^3.4.4",
     "mongoose": "^8.2.0",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
