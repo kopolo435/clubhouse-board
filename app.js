@@ -40,10 +40,10 @@ app.use(
 mongoose.set("strictQuery", false);
 const mongoDB = process.env.MONGODB_URI || process.env.DEV_DB_URL;
 
-main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
 }
+main().catch((err) => console.log(err));
 
 app.use(
   session({
@@ -65,7 +65,6 @@ app.use(
 
 require("./authentication/passport");
 
-app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(compression()); // Compress all routes
