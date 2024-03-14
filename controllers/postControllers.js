@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const path = require("path");
 const Post = require("../models/post");
+const Comments = require("../models/comments");
 const upload = require("../utils/uploadImg");
 
 module.exports.create_post_get = asyncHandler(async (req, res, next) => {
@@ -47,3 +48,17 @@ module.exports.create_post_post = [
     }
   }),
 ];
+
+module.exports.show_post_details = asyncHandler(async (req, res, next) => {
+  const [post, comments] = await Promise.all([
+    Post.findById(req.params.id).populate("user").exec(),
+    Comments.find({ post: req.params.id }).populate("user").exec(),
+  ]);
+
+  if (!post) {
+    const err = new Error("Error, el post no fue encontrado");
+    err.status = 404;
+    return next(err);
+  }
+  res.render("post_details", { post, comments });
+});

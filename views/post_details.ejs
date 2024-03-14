@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("head_layout",{title:post.title}) %>
+<body>
+    <div class="post">
+        <h1><%= post.title %></h1>
+        <p><%= post.content %></p>
+        <p><%= post.user.username %></p>
+    </div>
+    <div class="comments">
+        <% if (comments.length > 0) { %>
+            <ul>
+                <% comments.forEach(comment => { %>
+                    <li><%= comment.content %></li>
+                <% }) %>
+            </ul>
+        <% }else {%>
+            <p>Sin comentarios, se el primero es escribir uno</p>
+        <% } %>
+    </div>
+</body>
+</html>

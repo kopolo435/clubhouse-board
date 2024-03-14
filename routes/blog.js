@@ -11,11 +11,14 @@ router.get(
   postController.create_post_get
 );
 
-// POST create posty
+// POST create post
 router.post(
   "/posts/create",
   authMiddleware.isAuth,
   postController.create_post_post
 );
+
+// GET show post details
+router.get("/posts/:id", postController.show_post_details);
 
 module.exports = router;
