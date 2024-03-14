@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
         <%- include("head_layout",{title:post.title}) %>
+        <script src="/javascripts/newComment.js" defer></script>
 </head>
 <body>
     <div class="post">
@@ -11,12 +12,15 @@
     </div>
     <div class="newCommentContainer">
         <form action="" id="newCommentForm">
+            <input type="hidden" name="user" id="userId" value="<%= locals.currentUser.id %>">
+            <input type="hidden" name="post" id="postId" value="<%= post.id %>">
             <label for="newComment">
                 <textarea name="newComment" id="newComment"
-                 placeholder="Escribir comentario" cols="30" rows="10"></textarea>
+                 placeholder="Escribir comentario" cols="30" rows="10" minlength="1" required></textarea>
             </label>
             <button type="submit">Escribir comentario</button>
         </form>
+        <p class="errorText" id="newCommentError"></p>
     </div>
     <div class="comments">
         <% if (comments.length > 0) { %>
