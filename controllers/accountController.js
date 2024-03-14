@@ -123,3 +123,28 @@ module.exports.sign_in_post = [
     failureRedirect: "/logged",
   }),
 ];
+
+// GET add member page. Shows form to validate new member code
+module.exports.member_sign_up_get = asyncHandler(async (req, res, next) => {
+  res.render("new_member", { formValues: {}, errors: {} });
+});
+
+// POST add member. Validates new member code and shows errors if invalidad
+module.exports.member_sign_up_post = [
+  body("membercode")
+    .trim()
+    .escape()
+    .isLength({ min: 1 })
+    .withMessage("Debe introducir su codigo de membresia"),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("new_member", {
+        errors: errors.mapped(),
+        username: req.body.username,
+        password: req.body.password,
+      });
+    }
+  }),
+];
