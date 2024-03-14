@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const path = require("path");
 const Post = require("../models/post");
-const Comments = require("../models/comments");
+const Comments = require("../models/comment");
 const upload = require("../utils/uploadImg");
 
 module.exports.create_post_get = asyncHandler(async (req, res, next) => {
