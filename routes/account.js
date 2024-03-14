@@ -32,6 +32,6 @@ router.post(
 );
 
 // LogOut
-// router.get("logout", accountController.logout);
+router.get("/logout", accountController.logout);
 
 module.exports = router;

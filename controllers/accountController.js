@@ -152,3 +152,12 @@ module.exports.member_sign_up_post = [
     }
   }),
 ];
+
+module.exports.logout = asyncHandler(async (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
