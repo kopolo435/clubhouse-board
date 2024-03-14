@@ -1,0 +1,26 @@
+<% if (typeof error ==="undefined") { %>
+    <div class="textareaInput">
+        <label for="content">
+            <%= label %>
+            <textarea name="content" 
+            id="content" 
+            cols="30" 
+            rows="10" 
+            placeholder="Escriba aqui"
+            ><%= !value ? "" : value  %></textarea>
+        </label>
+    </div>
+<% }else{ %>
+    <div class="textareaInput">
+        <label for="content">
+            <%= label %>
+            <textarea name="content" 
+            id="content" 
+            cols="30" 
+            rows="10" 
+            placeholder="Escriba aqui"
+            ><%= !value ? "" : value  %></textarea>
+        </label>
+        <p class="errorText"><%= error.msg %></p>
+    </div>
+<%}%>

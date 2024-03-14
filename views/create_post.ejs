@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear nuevo Post</title>
+</head>
+<body>
+    <h1>Crear nuevo post</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        <%- include("textInput",{error:errors.title,name:"title",
+        label:"Titulo del post",type:"text",placeholder:"",value:post.title}) %>
+        <%- include("textareaInput",{error:errors.content,name:"content",value:post.content,
+            label:"Contenido del post",}) %>
+        <label for="img">
+            Agregar imagen al post
+            <input type="file" name="img" id="img">
+        </label>
+        <button type="submit">Crear post</button>
+    </form>
+</body>
+</html>
