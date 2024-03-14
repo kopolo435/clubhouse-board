@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include("head_layout",{title:post.title}) %>
+<head>
+        <%- include("head_layout",{title:post.title}) %>
+</head>
 <body>
     <div class="post">
         <h1><%= post.title %></h1>
         <p><%= post.content %></p>
         <p><%= post.user.username %></p>
+    </div>
+    <div class="newCommentContainer">
+        <form action="" id="newCommentForm">
+            <label for="newComment">
+                <textarea name="newComment" id="newComment"
+                 placeholder="Escribir comentario" cols="30" rows="10"></textarea>
+            </label>
+            <button type="submit">Escribir comentario</button>
+        </form>
     </div>
     <div class="comments">
         <% if (comments.length > 0) { %>
