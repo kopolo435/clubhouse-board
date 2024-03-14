@@ -126,7 +126,7 @@ module.exports.sign_in_post = [
 
 // GET add member page. Shows form to validate new member code
 module.exports.member_sign_up_get = asyncHandler(async (req, res, next) => {
-  res.render("new_member", { formValues: {}, errors: {} });
+  res.render("new_member_form", { membercode: "", errors: {} });
 });
 
 // POST add member. Validates new member code and shows errors if invalidad
@@ -135,16 +135,20 @@ module.exports.member_sign_up_post = [
     .trim()
     .escape()
     .isLength({ min: 1 })
-    .withMessage("Debe introducir su codigo de membresia"),
+    .withMessage("Debe introducir su codigo de membresia")
+    .equals("12345678")
+    .withMessage("El codigo ingresado no es valido"),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.render("new_member", {
+      res.render("new_member_form", {
         errors: errors.mapped(),
-        username: req.body.username,
-        password: req.body.password,
+        membercode: req.body.membercode,
       });
+    } else {
+      await User.findByIdAndUpdate(req.user.id, { is_member: true });
+      res.render("new_member_success");
     }
   }),
 ];
