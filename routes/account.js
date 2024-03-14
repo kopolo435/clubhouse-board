@@ -31,11 +31,6 @@ router.post(
   accountController.member_sign_up_post
 );
 
-// Test
-router.get("/protected", authMiddleware.isAuth, (req, res, next) => {
-  res.send("You made it to the route.");
-});
-
 // LogOut
 // router.get("logout", accountController.logout);
 
