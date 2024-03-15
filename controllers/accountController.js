@@ -2,10 +2,12 @@ const asyncHandler = require("express-async-handler");
 const passport = require("passport");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const path = require("path");
 const User = require("../models/user");
 const Comment = require("../models/comment");
 const Post = require("../models/post");
 const customValidators = require("../utils/customValidators");
+const upload = require("../utils/uploadImg");
 // Sign up get request
 module.exports.sign_up_get = asyncHandler(async (req, res, next) => {
   res.render("sign_up", { errors: {}, formValues: {} });
@@ -185,3 +187,79 @@ module.exports.user_profile = asyncHandler(async (req, res, next) => {
 
   res.render("user_profile", { user, posts, comments });
 });
+
+// Displays information of user found to update
+module.exports.update_user_get = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.params.id).exec();
+  if (!user) {
+    const err = new Error("Error, el usuario no fue encontrado");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("update_user_form", { user, errors: {} });
+});
+
+// Recieves request to update information on the user
+module.exports.update_user_post = [
+  upload.single("img"),
+  body("first_name")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Debe introducir su nombre")
+    .isAlpha("es-ES")
+    .withMessage("Error, ingreso caracteres invalidos"),
+
+  body("last_name")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Debe introducir su apellido")
+    .isAlpha("es-ES")
+    .withMessage("Error, ingreso caracteres invalidos"),
+
+  body("username")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Debe introducir su nombre de usuario")
+    .isAlphanumeric("en-US")
+    .withMessage("Error, ingreso caracteres invalidos")
+    .custom(customValidators.isUpdatedUsernameInUse)
+    .withMessage("Error, el nombre de usuario elegido ya se encuentra en uso"),
+
+  body("email")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Debe introducir un correo electronico")
+    .isEmail()
+    .withMessage("Error, debe introducir un correo electronico valido")
+    .custom(customValidators.isUpdatedEmailInUse)
+    .withMessage("Error, el correo ya se encuentra en uso"),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const oldUser = await User.findById(req.params.id).exec();
+
+    const user = new User({
+      _id: req.params.id,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      username: req.body.username,
+      email: req.body.email,
+    });
+    if (req.file) {
+      user.img_url = `/${path.relative("public", req.file.path)}`;
+    } else {
+      user.img_url = oldUser.img_url;
+    }
+    if (!errors.isEmpty()) {
+      res.render("update_user_form", { user, errors: errors.mapped() });
+    } else {
+      await User.findByIdAndUpdate(req.params.id, user);
+      res.redirect(user.url);
+    }
+  }),
+];

@@ -34,6 +34,12 @@ router.post(
 // LogOut
 router.get("/logout", accountController.logout);
 
+// GET update user
+router.get("/profiles/:id/update", accountController.update_user_get);
+
+// POST update user
+router.post("/profiles/:id/update", accountController.update_user_post);
+
 // GET User details
 router.get(
   "/profiles/:id",

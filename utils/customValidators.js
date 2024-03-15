@@ -17,3 +17,23 @@ module.exports.isUsernameInUse = async function isUsernameInUse(value) {
     throw new Error("Error, el nombre de usuario ya se encuentra en uso");
   }
 };
+
+module.exports.isUpdatedEmailInUse = async function isUpdatedEmailInUse(
+  value,
+  { req }
+) {
+  const user = await User.findOne({ email: value }).exec();
+  if (user && user.id !== req.params.id) {
+    throw new Error("Error, el nombre de usuario ya se encuentra en uso");
+  }
+};
+
+module.exports.isUpdatedUsernameInUse = async function isUpdatedEmailInUse(
+  value,
+  { req }
+) {
+  const user = await User.findOne({ username: value }).exec();
+  if (user && user.id !== req.params.id) {
+    throw new Error("Error, el nombre de usuario ya se encuentra en uso");
+  }
+};
