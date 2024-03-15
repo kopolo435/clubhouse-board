@@ -161,3 +161,15 @@ module.exports.logout = asyncHandler(async (req, res, next) => {
     res.redirect("/");
   });
 });
+
+module.exports.user_profile = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.params.id).exec();
+  if (!user) {
+    // No user with the id found
+    const err = new Error("Usuario no encontrado");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("user_profile", { user });
+});

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("head_layout",{title:user.username}) %>
+</head>
+<body>
+    <%- include("./components/header") %>
+    <main>
+        <h1>Perfil de <%= user.username %></h1>
+        <div class="info">
+            <p>Datos</p>
+            <ul>
+                <li><%= user.fullname %></li>
+                <li><%= user.email %></li>
+                <li><%= user.is_member ? "Es un miembro" : "No es miembro" %></li>
+            </ul>
+            <% if (user.id === locals.currentUser.id ) { %>
+             <a href="/account/update/<%= locals.currentUser.id %>">Actualizar datos</a>
+            <% } %>
+        </div>
+    </main>
+</body>
+</html>
