@@ -4,6 +4,7 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const path = require("path");
 const fs = require("node:fs/promises");
+require("dotenv").config();
 
 const User = require("../models/user");
 const Comment = require("../models/comment");
@@ -265,6 +266,40 @@ module.exports.update_user_post = [
         await fs.rm(`public/${oldUser.img_url}`);
       }
       res.redirect(user.url);
+    }
+  }),
+];
+
+// shows form to enter admin code
+module.exports.set_admin_get = asyncHandler(async (req, res, next) => {
+  res.render("admin_form", { adminCode: "", errors: {} });
+});
+
+// Validates admin code and if valid adds admin priviliges
+module.exports.set_admin_post = [
+  body("adminCode")
+    .trim()
+    .escape()
+    .isLength({ min: 1 })
+    .withMessage("Debe introducir un codigo"),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("admin_form", {
+        adminCode: req.body.adminCode,
+        errors: errors.mapped(),
+      });
+    } else if (req.body.adminCode === process.env.ADMIN_CODE) {
+      const user = await User.findById(res.locals.currentUser.id).exec();
+      user.is_admin = true;
+      await user.save();
+      res.redirect("/account/admin/dashboard");
+    } else {
+      res.render("admin_form", {
+        adminCode: req.body.adminCode,
+        errors: { adminCode: { msg: "El codigo ingresado es incorrecto" } },
+      });
     }
   }),
 ];

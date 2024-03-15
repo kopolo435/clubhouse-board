@@ -47,4 +47,18 @@ router.get(
   accountController.user_profile
 );
 
+// GET show admin form
+router.get(
+  "/admin/register",
+  authMiddleware.isAuth,
+  accountController.set_admin_get
+);
+
+// POST validate admin code
+router.post(
+  "/admin/register",
+  authMiddleware.isAuth,
+  accountController.set_admin_post
+);
+
 module.exports = router;
