@@ -15,7 +15,7 @@
                 <li><%= user.is_member ? "Es un miembro" : "No es miembro" %></li>
             </ul>
             <% if (user.id === locals.currentUser.id ) { %>
-             <a href="/account/update/<%= locals.currentUser.id %>">Actualizar datos</a>
+             <a href="<%= locals.currentUser.url %>/update">Actualizar datos</a>
             <% } %>
         </div>
         <div class="userActions">
