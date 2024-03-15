@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <%- include("head_layout",{title:"Dashboard"}) %>
+    <script src="/javascripts/deletePost.js" defer></script>
 </head>
 <body>
     <%- include("./components/header") %>
@@ -13,7 +14,7 @@
                 <% if (posts.length > 0) { %>
                     <ul>
                         <% posts.forEach(post => { %>
-                            <%- include("./components/postItem",{post}) %>
+                            <%- include("./components/postItem",{post,dashboard:true}) %>
                         <% }) %>
                     </ul>
                 <% }else{ %>

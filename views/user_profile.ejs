@@ -24,7 +24,7 @@
                 <% if (posts.length > 0) { %>
                     <ul>
                         <% posts.forEach(post => { %>
-                            <%- include("./components/postItem",{post}) %>
+                            <%- include("./components/postItem",{post,dashboard:false}) %>
                         <% }) %>
                     </ul>
                 <% }else{ %>
