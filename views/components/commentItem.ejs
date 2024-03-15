@@ -5,6 +5,10 @@
         </div>
         <p><%= comment.content %></p>
         <p><%= comment.formatted_date %></p>
+
+        <% if (dashboard && locals.currentUser.is_admin) { %>
+            <button class="deleteComment" data-id="<%= comment.id %>">Eliminar</button>
+        <% } %>
    </li>
    <% }else{ %>
        <li class="commentItem">

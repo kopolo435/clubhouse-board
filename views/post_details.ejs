@@ -33,7 +33,7 @@
         <% if (comments.length > 0) { %>
             <ul>
                 <% comments.forEach(comment => { %>
-                    <li><%= comment.content %></li>
+                    <%- include("./components/commentItem",{comment,dashboard:true}) %>
                 <% }) %>
             </ul>
         <% }else {%>
