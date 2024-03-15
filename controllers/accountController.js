@@ -3,6 +3,8 @@ const passport = require("passport");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const path = require("path");
+const fs = require("node:fs/promises");
+
 const User = require("../models/user");
 const Comment = require("../models/comment");
 const Post = require("../models/post");
@@ -259,6 +261,9 @@ module.exports.update_user_post = [
       res.render("update_user_form", { user, errors: errors.mapped() });
     } else {
       await User.findByIdAndUpdate(req.params.id, user);
+      if (req.file && oldUser.img_url !== "placeholder") {
+        await fs.rm(`public/${oldUser.img_url}`);
+      }
       res.redirect(user.url);
     }
   }),
