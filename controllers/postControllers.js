@@ -69,3 +69,12 @@ module.exports.get_posts_list = asyncHandler(async (req, res, next) => {
   const posts = await Post.find().populate("numComments").populate("user");
   res.render("posts_list", { posts });
 });
+
+module.exports.delete_post = async (req, res, next) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: `post deleted` });
+  } catch (error) {
+    res.status(400).json({ message: `Error when deleting post: ${error}` });
+  }
+};

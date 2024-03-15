@@ -22,6 +22,14 @@ router.post(
   postController.create_post_post
 );
 
+// POST delete post
+router.post(
+  "/posts/:id/delete",
+  authMiddleware.isAuth,
+  authMiddleware.isAdmin,
+  postController.delete_post
+);
+
 // GET show post details
 router.get("/posts/:id", postController.show_post_details);
 
