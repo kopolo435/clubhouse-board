@@ -3,6 +3,7 @@
 <head>
     <%- include("head_layout",{title:"Dashboard"}) %>
     <script src="/javascripts/deletePost.js" defer></script>
+    <script src="/javascripts/deleteComment.js" defer></script>
 </head>
 <body>
     <%- include("./components/header") %>
@@ -26,7 +27,7 @@
                 <% if (comments.length > 0) { %>
                     <ul>
                         <% comments.forEach(comment => { %>
-                            <%- include("./components/commentItem",{comment}) %>
+                            <%- include("./components/commentItem",{comment,dashboard:true}) %>
                         <% }) %>
                     </ul>
                 <% }else{ %>

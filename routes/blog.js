@@ -40,4 +40,12 @@ router.post(
   commentControler.create_comment
 );
 
+// POST delete comment
+router.post(
+  "/comments/:id/delete",
+  authMiddleware.isAuth,
+  authMiddleware.isAdmin,
+  commentControler.delete_comment
+);
+
 module.exports = router;

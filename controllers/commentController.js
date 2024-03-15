@@ -25,3 +25,12 @@ module.exports.create_comment = [
     }
   }),
 ];
+
+module.exports.delete_comment = async (req, res, next) => {
+  try {
+    await Comment.findByIdAndDelete(req.params.id).exec();
+    res.status(200).json({ message: "Comment deleted succesfully" });
+  } catch (error) {
+    res.status(400).json({ message: `Error when deleting post: ${error}` });
+  }
+};
