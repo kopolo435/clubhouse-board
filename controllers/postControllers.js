@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+const { DateTime } = require("luxon");
 const path = require("path");
 const Post = require("../models/post");
 const Comments = require("../models/comment");
@@ -61,4 +62,10 @@ module.exports.show_post_details = asyncHandler(async (req, res, next) => {
     return next(err);
   }
   res.render("post_details", { post, comments });
+});
+
+module.exports.get_posts_list = asyncHandler(async (req, res, next) => {
+  // Define the aggregation pipeline
+  const posts = await Post.find().populate("numComments").populate("user");
+  res.render("posts_list", { posts });
 });

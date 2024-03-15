@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("head_layout",{title:"Lista de posts"}) %>
+</head>
+<body>
+    <% if (posts.length>0) { %>
+        <ul>
+            <% posts.forEach(post => { %>
+                <%- include("./components/postItem",{post}) %>
+            <% }) %>
+        </ul>
+    <% }else{ %>
+        <p>No hay posts todavia</p>
+        <% } %>
+</body>
+</html>

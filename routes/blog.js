@@ -5,6 +5,9 @@ const postController = require("../controllers/postControllers");
 const commentControler = require("../controllers/commentController");
 const authMiddleware = require("./authMiddleware");
 
+// GET show list of all posts
+router.get("/posts", postController.get_posts_list);
+
 // GET Create post
 router.get(
   "/posts/create",

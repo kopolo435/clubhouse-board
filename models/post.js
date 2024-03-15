@@ -19,7 +19,14 @@ PostSchema.virtual("formatted_date").get(function () {
 });
 
 PostSchema.virtual("url").get(function () {
-  return `blog/posts/${this._id}`;
+  return `/blog/posts/${this._id}`;
+});
+
+PostSchema.virtual("numComments", {
+  ref: "Comment",
+  localField: "_id",
+  foreignField: "post",
+  count: true,
 });
 
 module.exports = mongoose.model("Post", PostSchema);
