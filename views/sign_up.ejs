@@ -4,6 +4,7 @@
   <%- include("head_layout",{title:"Registrarse"}) %>
 </head>
   <body>
+    <%- include("./components/header") %>
     <form action="" method="post">
       <%- include("textInput", {type:"text", label:"Nombre", name:"first_name",
       error:errors.first_name, value:formValues.first_name, placeholder:"Nombre"}) %>

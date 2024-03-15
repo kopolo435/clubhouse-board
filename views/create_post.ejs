@@ -4,6 +4,7 @@
     <%- include("head_layout",{title:"Crear nuevo post"}) %>
 </head>
 <body>
+    <%- include("./components/header") %>
     <h1>Crear nuevo post</h1>
     <form action="" method="post" enctype="multipart/form-data">
         <%- include("textInput",{error:errors.title,name:"title",

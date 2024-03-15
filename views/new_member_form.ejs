@@ -4,6 +4,7 @@
     <%- include("head_layout",{title:"Registro de miembro}) %>
 </head>
 <body>
+    <%- include("./components/header") %>
     <h1>Registrar codigo de miembro</h1>
     <form action="" method="post">
         <%- include("textInput",{error:errors.membercode,value:membercode,type:"text",

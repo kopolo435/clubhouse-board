@@ -5,14 +5,17 @@
 </head>
 <body>
     <%- include("./components/header") %>
-    <% if (posts.length>0) { %>
-        <ul>
-            <% posts.forEach(post => { %>
-                <%- include("./components/postItem",{post}) %>
-            <% }) %>
-        </ul>
-    <% }else{ %>
-        <p>No hay posts todavia</p>
+    <main>
+        <a href="/blog/posts/create">Crear nuevo post</a>
+        <% if (posts.length>0) { %>
+            <ul>
+                <% posts.forEach(post => { %>
+                    <%- include("./components/postItem",{post}) %>
+                <% }) %>
+            </ul>
+        <% }else{ %>
+            <p>No hay posts todavia</p>
         <% } %>
+    </main>
 </body>
 </html>

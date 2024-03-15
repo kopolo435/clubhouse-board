@@ -4,6 +4,7 @@
     <%- include("head_layout",{title:"Iniciar sesion"}) %>
 </head>
 <body>
+    <%- include("./components/header") %>
     <form action="" method="post">
         <%-include("textInput", {type:"text", label:"Nombre de usuario",
         name:"username", error:errors.username, value:user.username,

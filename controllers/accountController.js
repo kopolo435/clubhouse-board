@@ -119,8 +119,8 @@ module.exports.sign_in_post = [
     }
   },
   passport.authenticate("local", {
-    successRedirect: "/account/protected",
-    failureRedirect: "/logged",
+    successRedirect: "/blog/posts",
+    failureRedirect: "/account/sign-in",
   }),
 ];
 
