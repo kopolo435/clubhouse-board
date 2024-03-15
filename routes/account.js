@@ -34,4 +34,11 @@ router.post(
 // LogOut
 router.get("/logout", accountController.logout);
 
+// GET User details
+router.get(
+  "/profiles/:id",
+  authMiddleware.isAuth,
+  accountController.user_profile
+);
+
 module.exports = router;

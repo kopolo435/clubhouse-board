@@ -12,4 +12,26 @@ const UserSchema = new Schema({
   is_member: { type: Boolean, default: false },
 });
 
+UserSchema.virtual("url").get(function () {
+  return `/account/profiles/${this.id}`;
+});
+
+UserSchema.virtual("fullname").get(function () {
+  return `${this.first_name} ${this.last_name}`;
+});
+
+UserSchema.virtual("numPost", {
+  ref: "Post",
+  localField: "_id",
+  foreignField: "user",
+  count: true,
+});
+
+UserSchema.virtual("numComments", {
+  ref: "Comment",
+  localField: "_id",
+  foreignField: "user",
+  count: true,
+});
+
 module.exports = mongoose.model("User", UserSchema);

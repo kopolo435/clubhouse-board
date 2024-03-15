@@ -9,20 +9,26 @@
     <div class="post">
         <h1><%= post.title %></h1>
         <p><%= post.content %></p>
-        <p><%= post.user.username %></p>
+        <% if (locals.currentUser && locals.currentUser.is_member) { %>
+            <a href="<%= post.user.url %>"><%= post.user.username %></a>
+        <% } %>
     </div>
-    <div class="newCommentContainer">
-        <form action="" id="newCommentForm">
-            <input type="hidden" name="user" id="userId" value="<%= locals.currentUser.id %>">
-            <input type="hidden" name="post" id="postId" value="<%= post.id %>">
-            <label for="newComment">
-                <textarea name="newComment" id="newComment"
-                 placeholder="Escribir comentario" cols="30" rows="10" minlength="1" required></textarea>
-            </label>
-            <button type="submit">Escribir comentario</button>
-        </form>
-        <p class="errorText" id="newCommentError"></p>
-    </div>
+    <% if (locals.currentUser && locals.currentUser.is_member) { %>
+        <div class="newCommentContainer">
+            <form action="" id="newCommentForm">
+                <input type="hidden" name="user" id="userId" value="<%= locals.currentUser.id %>">
+                <input type="hidden" name="post" id="postId" value="<%= post.id %>">
+                <label for="newComment">
+                    <textarea name="newComment" id="newComment"
+                     placeholder="Escribir comentario" cols="30" rows="10" minlength="1" required></textarea>
+                </label>
+                <button type="submit">Escribir comentario</button>
+            </form>
+            <p class="errorText" id="newCommentError"></p>
+        </div>
+    <% }else{ %>
+        <p>Debe iniciar sesion para escribir un comentario</p>
+    <% } %>
     <div class="comments">
         <% if (comments.length > 0) { %>
             <ul>
