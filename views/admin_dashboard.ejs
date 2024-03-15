@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("head_layout",{title:"Dashboard"}) %>
+</head>
+<body>
+    <%- include("./components/header") %>
+    <h1>Dashboard</h1>
+    <main>
+        <div class="userActions">
+            <div class="postsContainer">
+                <h2>Posts realizados</h2>
+                <% if (posts.length > 0) { %>
+                    <ul>
+                        <% posts.forEach(post => { %>
+                            <%- include("./components/postItem",{post}) %>
+                        <% }) %>
+                    </ul>
+                <% }else{ %>
+                    <p>No se han realizado posts</p>
+                <% } %>
+            </div>
+            <div class="commentsContainer">
+                <h2>Comentarios realizados</h2>
+                <% if (comments.length > 0) { %>
+                    <ul>
+                        <% comments.forEach(comment => { %>
+                            <%- include("./components/commentItem",{comment}) %>
+                        <% }) %>
+                    </ul>
+                <% }else{ %>
+                    <p>No se han realizado comentarios</p>
+                <% } %>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

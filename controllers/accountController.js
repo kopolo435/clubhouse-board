@@ -303,3 +303,13 @@ module.exports.set_admin_post = [
     }
   }),
 ];
+
+// GET show admin dashboard
+module.exports.admin_dashboard = asyncHandler(async (req, res, next) => {
+  const [comments, posts] = await Promise.all([
+    Comment.find().sort({ date: -1 }).exec(),
+    Post.find().sort({ date: -1 }).exec(),
+  ]);
+
+  res.render("admin_dashboard", { comments, posts });
+});

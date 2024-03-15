@@ -61,4 +61,12 @@ router.post(
   accountController.set_admin_post
 );
 
+// GET show admin dashboard
+router.get(
+  "/admin/dashboard",
+  authMiddleware.isAuth,
+  authMiddleware.isAdmin,
+  accountController.admin_dashboard
+);
+
 module.exports = router;
