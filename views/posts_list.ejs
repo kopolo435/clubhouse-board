@@ -4,6 +4,7 @@
     <%- include("head_layout",{title:"Lista de posts"}) %>
 </head>
 <body>
+    <%- include("./components/header") %>
     <% if (posts.length>0) { %>
         <ul>
             <% posts.forEach(post => { %>

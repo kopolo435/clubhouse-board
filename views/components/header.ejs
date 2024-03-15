@@ -1,0 +1,11 @@
+<header>
+    <div class="accountOptions">
+        <% if (locals.currentUser) { %>
+            <a href="/account/logout">Cerrar sesion</a>
+            <p><%= locals.currentUser.username %></p>
+        <% }else{ %>
+            <a href="/account/sign-up">Registrarse</a>
+            <a href="/account/sign-in">Iniciar sesion</a>
+        <% } %>
+    </div>
+</header>
