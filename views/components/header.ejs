@@ -3,7 +3,7 @@
     <div class="accountOptions">
         <% if (locals.currentUser) { %>
             <a href="/account/logout">Cerrar sesion</a>
-            <p><%= locals.currentUser.username %></p>
+            <a href="<%= locals.currentUser.url  %>"><%=locals.currentUser.username  %></a>
         <% }else{ %>
             <a href="/account/sign-up">Registrarse</a>
             <a href="/account/sign-in">Iniciar sesion</a>
