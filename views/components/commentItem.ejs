@@ -1,0 +1,13 @@
+<% if (locals.currentUser && locals.currentUser.is_member) { %>
+    <li class="commentItem">
+        <div class="profileImg">
+            <img src="<%= comment.user.img_url%>" alt="">
+        </div>
+        <p><%= comment.content %></p>
+        <p><%= comment.formatted_date %></p>
+   </li>
+   <% }else{ %>
+       <li class="commentItem">
+            <p><%= comment.content %></p>
+       </li>
+   <% } %>

@@ -3,6 +3,8 @@ const passport = require("passport");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
+const Comment = require("../models/comment");
+const Post = require("../models/post");
 const customValidators = require("../utils/customValidators");
 // Sign up get request
 module.exports.sign_up_get = asyncHandler(async (req, res, next) => {
@@ -163,7 +165,17 @@ module.exports.logout = asyncHandler(async (req, res, next) => {
 });
 
 module.exports.user_profile = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.params.id).exec();
+  const [user, posts, comments] = await Promise.all([
+    User.findById(req.params.id).exec(),
+    Post.find({ user: req.params.id })
+      .populate("user")
+      .sort({ date: -1 })
+      .exec(),
+    Comment.find({ user: req.params.id })
+      .populate("user")
+      .sort({ date: -1 })
+      .exec(),
+  ]);
   if (!user) {
     // No user with the id found
     const err = new Error("Usuario no encontrado");
@@ -171,5 +183,5 @@ module.exports.user_profile = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.render("user_profile", { user });
+  res.render("user_profile", { user, posts, comments });
 });
