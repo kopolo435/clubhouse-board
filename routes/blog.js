@@ -33,6 +33,13 @@ router.post(
 // GET show post details
 router.get("/posts/:id", postController.show_post_details);
 
+// POST upvote post
+router.post(
+  "/post/:id/upvote",
+  authMiddleware.isAuth,
+  postController.upvote_post
+);
+
 // POST create comment
 router.post(
   "/comments/create",
