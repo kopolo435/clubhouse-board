@@ -40,6 +40,13 @@ router.post(
   postController.upvote_post
 );
 
+// POST downvote post
+router.post(
+  "/posts/:id/downvote",
+  authMiddleware.isAuth,
+  postController.downvote_post
+);
+
 // POST create comment
 router.post(
   "/comments/create",

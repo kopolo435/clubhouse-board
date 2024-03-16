@@ -124,3 +124,61 @@ module.exports.upvote_post = async (req, res, next) => {
     session.endSession(); // Always end the session after using it
   }
 };
+
+// POST route downvote post API
+module.exports.downvote_post = async (req, res, next) => {
+  const session = await mongoose.startSession();
+  try {
+    await session.withTransaction(async () => {
+      // Start of transaction
+      const [post, oldLike] = await Promise.all([
+        Post.findById(req.body.postid).session(session).exec(),
+        Like.findOne({ user: req.user.id, post: req.body.postid })
+          .session(session)
+          .exec(),
+      ]);
+      if (!post) {
+        // Post to like not found
+        const err = new Error("Error, no se econtro el post");
+        throw err;
+      }
+      if (oldLike) {
+        if (!oldLike.is_positive_like) {
+          // User wants to remove downvote
+          post.points += 1;
+          await Promise.all([
+            Like.findOneAndDelete({ _id: oldLike.id }),
+            post.save(),
+          ]);
+          res.status(200).json({ message: "Downvote removed" });
+          return Promise.resolve(true);
+        }
+        // User wants to change upvote to downvote
+        post.points -= 2;
+        oldLike.is_positive_like = false;
+        await Promise.all([post.save(), oldLike.save()]);
+        res.status(200).json({ message: "Post downvoted successfully" });
+        return Promise.resolve(true);
+      }
+      // first time like is a downvote
+      post.points -= 1;
+      const like = new Like({
+        post: req.body.postid,
+        user: req.user.id,
+        is_positive_like: false,
+      });
+
+      await Promise.all([post.save(), like.save()]);
+      res.status(200).json({ message: `Post downvoted successfully` });
+      return Promise.resolve(true);
+    });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: `Error, trying to downvote post: ${error}` });
+    session.endSession();
+    return Promise.resolve(false);
+  } finally {
+    session.endSession();
+  }
+};
