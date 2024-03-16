@@ -103,14 +103,21 @@ module.exports.upvote_post = async (req, res, next) => {
           // User wants to remove an upvote
           post.points -= 1;
           await Promise.all([post.save(), Like.findByIdAndDelete(oldLike.id)]);
-          res.status(200).json({ message: "Upvote remove succesfully" });
+          res
+            .status(200)
+            .json({
+              message: "Upvote remove succesfully",
+              points: post.points,
+            });
           return Promise.resolve(true);
         }
         // User wants to change from downvote to upvote
         oldLike.is_positive_like = true;
         post.points += 2;
         await Promise.all([post.save(), oldLike.save()]);
-        res.status(200).json({ message: `Post upvoted succesfully` });
+        res
+          .status(200)
+          .json({ message: `Post upvoted succesfully`, points: post.points });
         return Promise.resolve(true);
       }
       // first time like is an upvote
@@ -121,7 +128,9 @@ module.exports.upvote_post = async (req, res, next) => {
         is_positive_like: true,
       });
       await Promise.all([post.save(), like.save()]);
-      res.status(200).json({ message: `post upvoted succesfully` });
+      res
+        .status(200)
+        .json({ message: `post upvoted succesfully`, points: post.points });
       return Promise.resolve(true);
     });
   } catch (error) {
@@ -157,14 +166,20 @@ module.exports.downvote_post = async (req, res, next) => {
             Like.findOneAndDelete({ _id: oldLike.id }),
             post.save(),
           ]);
-          res.status(200).json({ message: "Downvote removed" });
+          res.status(200).json({
+            message: "Downvote removed",
+            points: post.points,
+          });
           return Promise.resolve(true);
         }
         // User wants to change upvote to downvote
         post.points -= 2;
         oldLike.is_positive_like = false;
         await Promise.all([post.save(), oldLike.save()]);
-        res.status(200).json({ message: "Post downvoted successfully" });
+        res.status(200).json({
+          message: "Post downvoted successfully",
+          points: post.points,
+        });
         return Promise.resolve(true);
       }
       // first time like is a downvote
@@ -176,7 +191,9 @@ module.exports.downvote_post = async (req, res, next) => {
       });
 
       await Promise.all([post.save(), like.save()]);
-      res.status(200).json({ message: `Post downvoted successfully` });
+      res
+        .status(200)
+        .json({ message: `Post downvoted successfully`, points: post.points });
       return Promise.resolve(true);
     });
   } catch (error) {

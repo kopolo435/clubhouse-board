@@ -16,7 +16,7 @@ async function downvotePost(event) {
   const response = await fetch(request);
   const responseData = await response.json();
   if (response.ok) {
-    console.log(responseData.message);
+    console.log(responseData.message, responseData.points);
   } else {
     console.log(responseData.message);
   }
