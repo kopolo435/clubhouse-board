@@ -62,4 +62,11 @@ router.post(
   commentControler.delete_comment
 );
 
+// POST upvote comment
+router.post(
+  "/comments/:id/upvote",
+  authMiddleware.isAuth,
+  commentControler.upvote_comment
+);
+
 module.exports = router;
