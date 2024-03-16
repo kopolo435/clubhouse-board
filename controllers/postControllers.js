@@ -86,6 +86,7 @@ module.exports.upvote_post = async (req, res, next) => {
   const session = await mongoose.startSession();
   try {
     await session.withTransaction(async () => {
+      // Start of transaction
       const [post, oldLike] = await Promise.all([
         Post.findById(req.body.postid).session(session).exec(),
         Like.findOne({ post: req.body.postid, user: req.user.id })
@@ -93,20 +94,26 @@ module.exports.upvote_post = async (req, res, next) => {
           .exec(),
       ]);
       if (!post) {
+        // Post to like not found
         const err = new Error("Error, no se econtro el post");
         throw err;
       }
       if (oldLike) {
         if (oldLike.is_positive_like) {
-          res.status(400).json({ message: `post was already upvoted` });
+          // User wants to remove an upvote
+          post.points -= 1;
+          await Promise.all([post.save(), Like.findByIdAndDelete(oldLike.id)]);
+          res.status(200).json({ message: "Upvote remove succesfully" });
           return Promise.resolve(true);
         }
+        // User wants to change from downvote to upvote
         oldLike.is_positive_like = true;
-        post.points += 1;
+        post.points += 2;
         await Promise.all([post.save(), oldLike.save()]);
-        res.status(200).json({ message: `post upvoted succesfully` });
+        res.status(200).json({ message: `Post upvoted succesfully` });
         return Promise.resolve(true);
       }
+      // first time like is an upvote
       post.points += 1;
       const like = new Like({
         post: req.body.postid,
