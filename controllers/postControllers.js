@@ -183,8 +183,6 @@ module.exports.downvote_post = async (req, res, next) => {
     res
       .status(400)
       .json({ message: `Error, trying to downvote post: ${error}` });
-    session.endSession();
-    return Promise.resolve(false);
   } finally {
     session.endSession();
   }
