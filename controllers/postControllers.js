@@ -67,9 +67,31 @@ module.exports.show_post_details = asyncHandler(async (req, res, next) => {
 });
 
 module.exports.get_posts_list = asyncHandler(async (req, res, next) => {
-  // Define the aggregation pipeline
-  const posts = await Post.find().populate("numComments").populate("user");
-  res.render("posts_list", { posts });
+  let posts;
+  // Checks if there is a sort filter for the posts
+  if (req.query.sortType) {
+    if (req.query.sortType === "date") {
+      posts = await Post.find()
+        .sort({ date: Number(req.query.sortOrder) })
+        .populate("numComments")
+        .populate("user");
+    } else {
+      posts = await Post.find()
+        .sort({ points: Number(req.query.sortOrder) })
+        .populate("numComments")
+        .populate("user");
+    }
+  } else {
+    posts = await Post.find()
+      .sort({ date: -1 })
+      .populate("numComments")
+      .populate("user");
+  }
+  res.render("posts_list", {
+    posts,
+    sortType: req.query.sortType,
+    sortOrder: req.query.sortOrder,
+  });
 });
 
 module.exports.delete_post = async (req, res, next) => {
@@ -103,12 +125,10 @@ module.exports.upvote_post = async (req, res, next) => {
           // User wants to remove an upvote
           post.points -= 1;
           await Promise.all([post.save(), Like.findByIdAndDelete(oldLike.id)]);
-          res
-            .status(200)
-            .json({
-              message: "Upvote remove succesfully",
-              points: post.points,
-            });
+          res.status(200).json({
+            message: "Upvote remove succesfully",
+            points: post.points,
+          });
           return Promise.resolve(true);
         }
         // User wants to change from downvote to upvote
