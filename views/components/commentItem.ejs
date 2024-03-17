@@ -3,9 +3,9 @@
         <div class="profileImg">
             <img src="<%= comment.user.img_url%>" alt="">
         </div>
-        <div class="points">
+        <div class="pointsContainer">
             <button class="upvoteComment" data-comment_id="<%= comment.id %>">Like</button>
-            <p><%= comment.points %></p>
+            <p class="pointCounter"><%= comment.points %></p>
             <button class="downvoteComment" data-comment_id="<%= comment.id %>">Liken't</button>
         </div>
         <p><%= comment.content %></p>
