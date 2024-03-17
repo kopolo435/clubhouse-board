@@ -24,7 +24,14 @@ module.exports.create_comment = [
       res.status(400).json({ error: errors.mapped().comment });
     } else {
       await comment.save();
-      res.status(200).json({ message: "Comentario guardado" });
+      res.status(200).json({
+        message: "Comentario guardado",
+        user: {
+          ...res.locals.currentUser._doc,
+          url: res.locals.currentUser.url,
+        },
+        comment: { ...comment._doc, formatted_date: comment.formatted_date },
+      });
     }
   }),
 ];

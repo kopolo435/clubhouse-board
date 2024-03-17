@@ -1,4 +1,10 @@
+import addComment from "./commentTemplate.js";
+
 const newCommentForm = document.getElementById("newCommentForm");
+
+function displayNewComment(comment, locals) {
+  addComment(comment, locals);
+}
 
 function displayError(message) {
   const p = document.getElementById("newCommentError");
@@ -40,6 +46,7 @@ newCommentForm.addEventListener("submit", async (e) => {
   if (response.status === 200) {
     const responseData = await response.json();
     hideError();
+    displayNewComment(responseData.comment, responseData.user);
     console.log(responseData.message); // Success message
   } else {
     const errorData = await response.json();

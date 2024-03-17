@@ -53,3 +53,5 @@ Array.from(upvoteCommentBtns).forEach((button) => {
 Array.from(downvoteCommentsBtns).forEach((button) => {
   button.addEventListener("click", downvoteComment);
 });
+
+export { upvoteComment, downvoteComment };
