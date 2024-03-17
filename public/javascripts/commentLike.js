@@ -1,11 +1,7 @@
+import updatePointCounter from "./updatePointCounter.js";
+
 const upvoteCommentBtns = document.getElementsByClassName("upvoteComment");
 const downvoteCommentsBtns = document.getElementsByClassName("downvoteComment");
-
-function updatePointCounter(button, points) {
-  const pointsContainer = button.closest(".pointsContainer");
-  const pointCounter = pointsContainer.querySelector(".pointCounter");
-  pointCounter.textContent = points;
-}
 
 async function upvoteComment(event) {
   const button = event.target;

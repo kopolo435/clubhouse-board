@@ -1,3 +1,5 @@
+import updatePointCounter from "./updatePointCounter.js";
+
 const downvoteBtns = document.getElementsByClassName("downvotePost");
 
 async function downvotePost(event) {
@@ -17,6 +19,7 @@ async function downvotePost(event) {
   const responseData = await response.json();
   if (response.ok) {
     console.log(responseData.message, responseData.points);
+    updatePointCounter(button, responseData.points);
   } else {
     console.log(responseData.message);
   }

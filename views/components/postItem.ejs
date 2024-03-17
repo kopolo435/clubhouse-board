@@ -7,9 +7,9 @@
         <p><%= post.content %></p>
         <p><%= post.numComments %></p>
     </a>
-    <div class="points">
+    <div class="pointsContainer">
         <button type="button" class="upvotePost" data-postid="<%= post.id %>">Like</button>
-        <p><%= post.points %></p>
+        <p class="pointCounter"><%= post.points %></p>
         <button type="button" class="downvotePost" data-postid="<%= post.id %>">Liken't</button>
     </div>
     <% if (dashboard &&locals.currentUser.is_admin) { %>
