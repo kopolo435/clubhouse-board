@@ -55,6 +55,8 @@ module.exports.create_post_post = [
 module.exports.show_post_details = asyncHandler(async (req, res, next) => {
   let post;
   let comments;
+  let { sortType } = req.query;
+  let { sortOrder } = req.query;
   // Checks if there is a sort filter for the comments
   if (req.query.sortType) {
     if (req.query.sortType === "date") {
@@ -78,6 +80,8 @@ module.exports.show_post_details = asyncHandler(async (req, res, next) => {
     }
   } else {
     // Default sort order by descending date
+    sortType = "date";
+    sortOrder = "-1";
     [post, comments] = await Promise.all([
       Post.findById(req.params.id).populate("user").exec(),
       Comments.find({ post: req.params.id })
@@ -94,13 +98,15 @@ module.exports.show_post_details = asyncHandler(async (req, res, next) => {
   res.render("post_details", {
     post,
     comments,
-    sortType: req.query.sortType,
-    sortOrder: req.query.sortOrder,
+    sortType,
+    sortOrder,
   });
 });
 
 module.exports.get_posts_list = asyncHandler(async (req, res, next) => {
   let posts;
+  let { sortType } = req.query;
+  let { sortOrder } = req.query;
   // Checks if there is a sort filter for the posts
   if (req.query.sortType) {
     if (req.query.sortType === "date") {
@@ -122,11 +128,13 @@ module.exports.get_posts_list = asyncHandler(async (req, res, next) => {
       .populate("numComments")
       .populate("user")
       .exec();
+    sortType = "date";
+    sortOrder = "-1";
   }
   res.render("posts_list", {
     posts,
-    sortType: req.query.sortType,
-    sortOrder: req.query.sortOrder,
+    sortType,
+    sortOrder,
   });
 });
 
