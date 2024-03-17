@@ -30,6 +30,24 @@
     <% }else{ %>
         <p>Debe iniciar sesion para escribir un comentario</p>
     <% } %>
+    <form action="" method="get">
+        <fieldset>
+            <legend>Ordenar lista</legend>
+            <div class="sortTypeContainer">
+                <%- include("./components/sortRadio",{id:"dateSort",name:"sortType",
+                value:"date",label:"Fecha de creacion",sortType:sortType}) %>
+                <%- include("./components/sortRadio",{id:"pointSort",name:"sortType",
+                value:"point",label:"Cantidad de puntos",sortType:sortType}) %>
+            </div>
+            <div class="sortOrder">
+                <%- include("./components/sortRadio",{id:"ascendingOrder",name:"sortOrder",
+                value:"1",label:" Ascendente",sortType:sortOrder}) %>
+                <%- include("./components/sortRadio",{id:"descendingOrder",name:"sortOrder",
+                value:"-1",label:" Descendente",sortType:sortOrder}) %>
+            </div>
+        </fieldset>
+        <button type="submit">Ordenar</button>
+    </form>
     <div class="comments">
         <% if (comments.length > 0) { %>
             <ul>

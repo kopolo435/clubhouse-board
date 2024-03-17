@@ -53,17 +53,50 @@ module.exports.create_post_post = [
 ];
 
 module.exports.show_post_details = asyncHandler(async (req, res, next) => {
-  const [post, comments] = await Promise.all([
-    Post.findById(req.params.id).populate("user").exec(),
-    Comments.find({ post: req.params.id }).populate("user").exec(),
-  ]);
-
+  let post;
+  let comments;
+  // Checks if there is a sort filter for the comments
+  if (req.query.sortType) {
+    if (req.query.sortType === "date") {
+      // Sort comments by date
+      [post, comments] = await Promise.all([
+        Post.findById(req.params.id).populate("user").exec(),
+        Comments.find({ post: req.params.id })
+          .sort({ date: Number(req.query.sortOrder) })
+          .populate("user")
+          .exec(),
+      ]);
+    } else {
+      // Sort comments by points
+      [post, comments] = await Promise.all([
+        Post.findById(req.params.id).populate("user").exec(),
+        Comments.find({ post: req.params.id })
+          .sort({ points: Number(req.query.sortOrder) })
+          .populate("user")
+          .exec(),
+      ]);
+    }
+  } else {
+    // Default sort order by descending date
+    [post, comments] = await Promise.all([
+      Post.findById(req.params.id).populate("user").exec(),
+      Comments.find({ post: req.params.id })
+        .sort({ date: -1 })
+        .populate("user")
+        .exec(),
+    ]);
+  }
   if (!post) {
     const err = new Error("Error, el post no fue encontrado");
     err.status = 404;
     return next(err);
   }
-  res.render("post_details", { post, comments });
+  res.render("post_details", {
+    post,
+    comments,
+    sortType: req.query.sortType,
+    sortOrder: req.query.sortOrder,
+  });
 });
 
 module.exports.get_posts_list = asyncHandler(async (req, res, next) => {
