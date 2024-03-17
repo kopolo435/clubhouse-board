@@ -107,18 +107,21 @@ module.exports.get_posts_list = asyncHandler(async (req, res, next) => {
       posts = await Post.find()
         .sort({ date: Number(req.query.sortOrder) })
         .populate("numComments")
-        .populate("user");
+        .populate("user")
+        .exec();
     } else {
       posts = await Post.find()
         .sort({ points: Number(req.query.sortOrder) })
         .populate("numComments")
-        .populate("user");
+        .populate("user")
+        .exec();
     }
   } else {
     posts = await Post.find()
       .sort({ date: -1 })
       .populate("numComments")
-      .populate("user");
+      .populate("user")
+      .exec();
   }
   res.render("posts_list", {
     posts,
