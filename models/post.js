@@ -8,7 +8,7 @@ const PostSchema = new Schema({
   content: { type: String, required: true },
   img_url: { type: String },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  points: { type: Number, default: 1 },
+  points: { type: Number, default: 0 },
   date: { type: Date, default: Date.now },
 });
 

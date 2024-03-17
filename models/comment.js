@@ -7,7 +7,7 @@ const CommentsSchema = new Schema({
   content: { type: String, required: true },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   post: { type: Schema.Types.ObjectId, ref: "Post", required: true },
-  points: { type: Number, default: 1 },
+  points: { type: Number, default: 0 },
   date: { type: Date, default: Date.now },
 });
 
