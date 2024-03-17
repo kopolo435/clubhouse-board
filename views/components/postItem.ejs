@@ -7,6 +7,11 @@
         <p><%= post.content %></p>
         <p><%= post.numComments %></p>
     </a>
+    <div class="points">
+        <button type="button" class="upvotePost" data-postid="<%= post.id %>">Like</button>
+        <p><%= post.points %></p>
+        <button type="button" class="downvotePost" data-postid="<%= post.id %>">Liken't</button>
+    </div>
     <% if (dashboard &&locals.currentUser.is_admin) { %>
         <button class="deletePost" data-id="<%= post.id %>">Borrar post</button>
     <% } %>

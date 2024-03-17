@@ -3,9 +3,13 @@
         <div class="profileImg">
             <img src="<%= comment.user.img_url%>" alt="">
         </div>
+        <div class="points">
+            <button class="upvoteComment" data-comment_id="<%= comment.id %>">Like</button>
+            <p><%= comment.points %></p>
+            <button class="downvoteComment" data-comment_id="<%= comment.id %>">Liken't</button>
+        </div>
         <p><%= comment.content %></p>
         <p><%= comment.formatted_date %></p>
-
         <% if (dashboard && locals.currentUser.is_admin) { %>
             <button class="deleteComment" data-id="<%= comment.id %>">Eliminar</button>
         <% } %>
