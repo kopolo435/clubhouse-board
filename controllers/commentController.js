@@ -81,7 +81,7 @@ module.exports.upvote_comment = async (req, res, next) => {
         oldLike.is_positive_like = true;
         await Promise.all([comment.save(), oldLike.save()]);
         res.status(200).json({
-          message: "Upvote changed to downvote successfully",
+          message: "Downvote changed to upvote successfully",
           points: comment.points,
         });
         return Promise.resolve(true);
@@ -147,7 +147,7 @@ module.exports.downvote_comment = async (req, res, next) => {
         oldLike.is_positive_like = false;
         await Promise.all([comment.save(), oldLike.save()]);
         res.status(200).json({
-          message: "Downvote changed to upvote successfully",
+          message: "Upvote changed to downvote successfully",
           points: comment.points,
         });
         return Promise.resolve(true);
