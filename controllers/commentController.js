@@ -102,3 +102,69 @@ module.exports.upvote_comment = async (req, res, next) => {
     session.endSession();
   }
 };
+
+module.exports.downvote_comment = async (req, res, next) => {
+  const session = await mongoose.startSession();
+  try {
+    await session.withTransaction(async () => {
+      const [comment, oldLike] = await Promise.all([
+        Comment.findById(req.body.comment_id).session(session).exec(),
+        CommentLike.findOne({
+          user: req.user.id,
+          comment: req.body.comment_id,
+        })
+          .session(session)
+          .exec(),
+      ]);
+      if (!comment) {
+        // Comment to upvote not found
+        const err = new Error("Error, could not find the comment to downvote");
+        throw err;
+      }
+      if (oldLike) {
+        if (!oldLike.is_positive_like) {
+          // User wants to remove downvote
+          comment.points += 1;
+          await Promise.all([
+            comment.save(),
+            CommentLike.findByIdAndDelete(oldLike.id),
+          ]);
+          res.status(200).json({
+            message: "Downvote removed successfully",
+            points: comment.points,
+          });
+          return Promise.resolve(true);
+        }
+        // User wants to change from upvote to downvote
+        comment.points += 2;
+        oldLike.is_positive_like = true;
+        await Promise.all([comment.save(), oldLike.save()]);
+        res.status(200).json({
+          message: "Downvote changed to upvote successfully",
+          points: comment.points,
+        });
+        return Promise.resolve(true);
+      }
+      // User is making like on comment for the first time
+      comment.points -= 1;
+      const like = new CommentLike({
+        user: req.user.id,
+        comment: req.body.comment_id,
+        is_positive_like: false,
+      });
+      await Promise.all([comment.save(), like.save()]);
+      res.status(200).json({
+        message: "Comment downvoted successfully",
+        points: comment.points,
+      });
+      return Promise.resolve(true);
+    });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: `Error could not downvote comment because: ${error}` });
+    return Promise.resolve(false);
+  } finally {
+    session.endSession();
+  }
+};

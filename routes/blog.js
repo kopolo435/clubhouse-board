@@ -69,4 +69,11 @@ router.post(
   commentControler.upvote_comment
 );
 
+// POST downvote comment
+router.post(
+  "/comments/:id/downvote",
+  authMiddleware.isAuth,
+  commentControler.downvote_comment
+);
+
 module.exports = router;
