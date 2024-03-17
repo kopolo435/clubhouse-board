@@ -143,8 +143,8 @@ module.exports.downvote_comment = async (req, res, next) => {
           return Promise.resolve(true);
         }
         // User wants to change from upvote to downvote
-        comment.points += 2;
-        oldLike.is_positive_like = true;
+        comment.points -= 2;
+        oldLike.is_positive_like = false;
         await Promise.all([comment.save(), oldLike.save()]);
         res.status(200).json({
           message: "Downvote changed to upvote successfully",
