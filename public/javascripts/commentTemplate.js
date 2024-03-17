@@ -12,6 +12,8 @@ function createPointsContainer(comment) {
   const pointsContainer = document.createElement("div");
   const pointsValue = document.createElement("p");
 
+  pointsContainer.classList.add("pointsContainer");
+  pointsValue.classList.add("pointCounter");
   upvoteButton.dataset.comment_id = comment._id;
   downvoteButton.dataset.comment_id = comment._id;
 

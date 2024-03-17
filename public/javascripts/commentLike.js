@@ -1,6 +1,12 @@
 const upvoteCommentBtns = document.getElementsByClassName("upvoteComment");
 const downvoteCommentsBtns = document.getElementsByClassName("downvoteComment");
 
+function updatePointCounter(button, points) {
+  const pointsContainer = button.closest(".pointsContainer");
+  const pointCounter = pointsContainer.querySelector(".pointCounter");
+  pointCounter.textContent = points;
+}
+
 async function upvoteComment(event) {
   const button = event.target;
   const { comment_id } = button.dataset;
@@ -19,6 +25,7 @@ async function upvoteComment(event) {
 
   if (response.ok) {
     console.log(responseData.message, responseData.points);
+    updatePointCounter(button, responseData.points);
   } else {
     console.log(responseData.message);
   }
@@ -41,6 +48,7 @@ async function downvoteComment(event) {
   const responseData = await response.json();
   if (response.ok) {
     console.log(responseData.message, responseData.points);
+    updatePointCounter(button, responseData.points);
   } else {
     console.log(responseData.message);
   }
