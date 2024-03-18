@@ -2,3 +2,12 @@
 /.vscode
 eslintconifg.json
 .env
+
+# ignore the whole folder
+/public/stylesheets/*.*
+
+# but don't ignore this specific file inside it
+!src/css/app.css
+!src/css/app.css.map
+!src/css/app.min.css
+!src/css/app.min.css.map
