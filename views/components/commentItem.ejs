@@ -1,17 +1,18 @@
-<% if (locals.currentUser && locals.currentUser.is_member) { %>
-    <li class="commentItem">
-        <div class="profileImg">
-            <img src="<%= comment.user.img_url%>" alt="">
-        </div>
+<li class="commentItem">
         <%- include("pointCounter",{element:comment,post:false}) %>
-        <p><%= comment.content %></p>
-        <p><%= comment.formatted_date %></p>
+        <div class="commentContainer">
+            <% if (locals.currentUser && locals.currentUser.is_member) { %>
+                <div class="userInfo">
+                    <div class="profileImg">
+                        <img src="<%= comment.user.img_url%>" alt="">
+                    </div>
+                    <p><%= comment.user.username %></p>
+                </div>
+            <% } %>
+            <p class="commentContent"><%= comment.content %></p>
+            <p class="commentDate"><%= comment.formatted_date %></p>
+        </div>
         <% if (dashboard && locals.currentUser.is_admin) { %>
             <button class="deleteComment" data-id="<%= comment.id %>">Eliminar</button>
         <% } %>
-   </li>
-   <% }else{ %>
-       <li class="commentItem">
-            <p><%= comment.content %></p>
-       </li>
-   <% } %>
+</li>
