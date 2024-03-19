@@ -35,6 +35,13 @@
 .userActions {
   flex: 1;
   max-width: 430px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  select {
+    align-self: self-start;
+  }
 }
 
 .commentList {
