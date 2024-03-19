@@ -2,13 +2,18 @@
 <html lang="en">
 <head>
     <%- include("head_layout",{title:user.username}) %>
+    <script src="/javascripts/changeItemsDisplayed.js" defer></script>
 </head>
 <body>
     <%- include("./components/header") %>
-    <main>
-        <h1>Perfil de <%= user.username %></h1>
+    <main class="userProfileMain">
         <div class="info">
-            <p>Datos</p>
+            <h1>Perfil de <%= user.username %></h1>
+            <div class="imgContainer">
+                <img src="<%= user.img_url %>" alt="">
+                <p><%= user.username %></p>
+            </div>
+            <h2>Datos</h2>
             <ul>
                 <li><%= user.fullname %></li>
                 <li><%= user.email %></li>
@@ -16,33 +21,41 @@
             </ul>
             <% if (user.id === locals.currentUser.id ) { %>
              <a href="<%= locals.currentUser.url %>/update">Actualizar datos</a>
+             <a href="/account/new-member">Hacerse miembro</a>
              <a href="/account/logout">Cerrar sesion</a>
             <% } %>
         </div>
-        <div class="userActions">
-            <div class="postsContainer">
-                <h2>Posts realizados</h2>
-                <% if (posts.length > 0) { %>
-                    <ul>
-                        <% posts.forEach(post => { %>
-                            <%- include("./components/postItem",{post,dashboard:false}) %>
-                        <% }) %>
-                    </ul>
-                <% }else{ %>
-                    <p>No se han realizado posts</p>
-                <% } %>
-            </div>
-            <div class="commentsContainer">
-                <h2>Comentarios realizados</h2>
-                <% if (comments.length > 0) { %>
-                    <ul>
-                        <% comments.forEach(comment => { %>
-                            <%- include("./components/commentItem",{comment,dashboard:true}) %>
-                        <% }) %>
-                    </ul>
-                <% }else{ %>
-                    <p>No se han realizado comentarios</p>
-                <% } %>
+        <div class="container">
+            <div class="userActions">
+                <h2>Actividad reciente</h2>
+                <select name="" id="itemDisplay">
+                    <option value="posts">Posts</option>
+                    <option value="comments">Comentarios</option>
+                </select>
+                <div class="postsContainer">
+                    <h3>Posts realizados</h3>
+                    <% if (posts.length > 0) { %>
+                        <ul class="postList">
+                            <% posts.forEach(post => { %>
+                                <%- include("./components/postItem",{post,dashboard:false}) %>
+                            <% }) %>
+                        </ul>
+                    <% }else{ %>
+                        <p>No se han realizado posts</p>
+                    <% } %>
+                </div>
+                <div class="commentsContainer hide">
+                    <h3>Comentarios realizados</h3>
+                    <% if (comments.length > 0) { %>
+                        <ul class="commentList">
+                            <% comments.forEach(comment => { %>
+                                <%- include("./components/commentItem",{comment,dashboard:false}) %>
+                            <% }) %>
+                        </ul>
+                    <% }else{ %>
+                        <p>No se han realizado comentarios</p>
+                    <% } %>
+                </div>
             </div>
         </div>
     </main>

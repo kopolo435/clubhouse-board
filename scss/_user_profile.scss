@@ -1,0 +1,63 @@
+.imgContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  img {
+    object-fit: cover;
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+  }
+}
+
+.userProfileMain {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.commentsContainer.hide {
+  display: none;
+}
+
+.postsContainer.hide {
+  display: none;
+}
+
+.userActions {
+  flex: 1;
+  max-width: 430px;
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+@media (min-width: 600px) {
+  .userProfileMain {
+    flex-direction: row;
+    align-items: flex-start;
+
+    .container {
+      width: 600px;
+    }
+  }
+
+  .imgContainer {
+    img {
+      height: 150px;
+      width: 150px;
+      border-radius: 75px;
+    }
+  }
+}
