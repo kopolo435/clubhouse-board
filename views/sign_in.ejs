@@ -5,14 +5,21 @@
 </head>
 <body>
     <%- include("./components/header") %>
-    <form action="" method="post">
-        <%-include("textInput", {type:"text", label:"Nombre de usuario",
-        name:"username", error:errors.username, value:user.username,
-        placeholder:"manzanita123"}) %> 
-        <%-include("textInput", {type:"password",label:"Contraseña",
-        name:"password",error:errors.password, value:user.password,
-        placeholder:""}) %> 
-        <button type="submit">Log in</button>
-    </form>
+    <main>
+        <div class="container">
+            <form action="" method="post" class="fieldForm">
+                <h1>Iniciar sesion</h1>
+                <p>Inicie sesion para poder hacer uso de los privilegios de crear posts, comentarios y valorarlos </p>
+                <%-include("textInput", {type:"text", label:"Nombre de usuario",
+                name:"username", error:errors.username, value:user.username,
+                placeholder:"manzanita123"}) %>
+                <%-include("textInput", {type:"password",label:"Contraseña",
+                name:"password",error:errors.password, value:user.password,
+                placeholder:""}) %>
+                <button type="submit">Log in</button>
+                <p>No tiene una cuenta? haga click poder registrarse <a href="/account/sign-up">Registrarse</a></p>
+            </form>
+        </div>
+    </main>
 </body>
 </html>

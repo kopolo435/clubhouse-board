@@ -1,0 +1,20 @@
+.fieldForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: gray;
+  padding: 20px;
+  align-items: center;
+  flex: 1;
+  max-width: 550px;
+}
+
+.textLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.textInput {
+  padding: 2px 5px;
+}

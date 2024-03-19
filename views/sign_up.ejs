@@ -5,27 +5,28 @@
 </head>
   <body>
     <%- include("./components/header") %>
-    <form action="" method="post">
-      <%- include("textInput", {type:"text", label:"Nombre", name:"first_name",
-      error:errors.first_name, value:formValues.first_name, placeholder:"Nombre"}) %>
-
-      <%-include("textInput", {type:"text", label:"Apellido", name:"last_name",
-      error:errors.last_name, value:formValues.last_name, placeholder:"Apellido"}) %>
-
-      <%-include("textInput", {type:"email", label:"Correo", name:"email",
-      error:errors.email, formValues, value:formValues.email, placeholder:"correo@gmail.com"}) %>
-
-      <%-include("textInput", {type:"text", label:"Nombre de usuario",
-      name:"username", error:errors.username, value:formValues.username,
-      placeholder:"manzanita123"}) %> 
-
-      <%-include("textInput", {type:"password",label:"Contraseña",
-      name:"password",error:errors.password, value:formValues.password,
-      placeholder:""}) %> 
-
-      <%-include("textInput",{type:"password",label:"Confirmar contraseña", name:"passwordConfirmation",
-       error:errors.passwordConfirmation, value:formValues.passwordConfirmation, placeholder:""}) %> 
-    <button type="submit">Registrarse</button>
-    </form>
+    <main>
+      <div class="container">
+        <form action="" method="post" class="fieldForm">
+          <h1>Registrarse</h1>
+          <p>Registre una cuenta para poder hacer uso de los privilegios de crear posts, comentarios y valorarlos </p>
+          <%- include("textInput", {type:"text", label:"Nombre", name:"first_name",
+          error:errors.first_name, value:formValues.first_name, placeholder:"Nombre"}) %>
+          <%-include("textInput", {type:"text", label:"Apellido", name:"last_name",
+          error:errors.last_name, value:formValues.last_name, placeholder:"Apellido"}) %>
+          <%-include("textInput", {type:"email", label:"Correo", name:"email",
+          error:errors.email, formValues, value:formValues.email, placeholder:"correo@gmail.com"}) %>
+          <%-include("textInput", {type:"text", label:"Nombre de usuario",
+          name:"username", error:errors.username, value:formValues.username,
+          placeholder:"manzanita123"}) %>
+          <%-include("textInput", {type:"password",label:"Contraseña",
+          name:"password",error:errors.password, value:formValues.password,
+          placeholder:""}) %>
+          <%-include("textInput",{type:"password",label:"Confirmar contraseña", name:"passwordConfirmation",
+           error:errors.passwordConfirmation, value:formValues.passwordConfirmation, placeholder:""}) %>
+        <button type="submit">Registrarse</button>
+        </form>
+      </div>
+    </main>
   </body>
 </html>
