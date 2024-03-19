@@ -6,15 +6,15 @@
 </head>
 <body>
     <%- include("./components/header") %>
-    <main>
-        <form action="" method="get">
-            <fieldset>
+    <main class="postListMain">
+        <form action="" method="get" class="sortPostForm">
+            <fieldset class="sortPostContainer">
                 <legend>Ordenar lista</legend>
                 <div class="sortTypeContainer">
                     <%- include("./components/sortRadio",{id:"dateSort",name:"sortType",
                     value:"date",label:"Fecha de creacion",sortType:sortType}) %>
                     <%- include("./components/sortRadio",{id:"pointSort",name:"sortType",
-                    value:"point",label:"Cantidad de puntos",sortType:sortType}) %>
+                    value:"point",label:"Total de puntos",sortType:sortType}) %>
                 </div>
                 <div class="sortOrder">
                     <%- include("./components/sortRadio",{id:"ascendingOrder",name:"sortOrder",
@@ -22,8 +22,8 @@
                     <%- include("./components/sortRadio",{id:"descendingOrder",name:"sortOrder",
                     value:"-1",label:" Descendente",sortType:sortOrder}) %>
                 </div>
+                <button type="submit">Ordenar</button>
             </fieldset>
-            <button type="submit">Ordenar</button>
         </form>
         <a href="/blog/posts/create">Crear nuevo post</a>
         <% if (posts.length>0) { %>
