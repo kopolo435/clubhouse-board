@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include("./components/header",{title:"Registro de admin"}) %>
+    <%- include("head_layout",{title:"Registro de admin"}) %>
 </head>
 <body>
-    <h1>Ingreso de codigo de admin</h1>
-    <form action="" method="post">
-        <%- include("textInput",{error:errors.adminCode,value:adminCode,type:"password",
-        name:"adminCode", label:"Codigo de admin", placeholder:""}) %>
-        <button type="submit">Registrar codigo</button>
-    </form>
+    <%- include("./components/header",{title:"Registro de admin"}) %>
+    <main>
+        <div class="container">
+            <form action="" method="post" class="fieldForm">
+                <h1>Ingreso de codigo de admin</h1>
+                <p>Registrese como admin para poder eliminar posts o comentarios</p>
+                <%- include("textInput",{error:errors.adminCode,value:adminCode,type:"password",
+                name:"adminCode", label:"Codigo de admin", placeholder:""}) %>
+                <button type="submit">Registrar codigo</button>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
