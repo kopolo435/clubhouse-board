@@ -1,0 +1,35 @@
+header {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1500px;
+  align-self: center;
+  align-items: center;
+
+  .userInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .profileImg {
+    img {
+      object-fit: cover;
+      border-radius: 20px;
+      height: 50px;
+      width: 50px;
+    }
+  }
+}
+
+.headerContainer {
+  align-self: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.accountOptions {
+  display: flex;
+  gap: 15px;
+}

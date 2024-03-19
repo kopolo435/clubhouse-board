@@ -16,6 +16,7 @@
             </ul>
             <% if (user.id === locals.currentUser.id ) { %>
              <a href="<%= locals.currentUser.url %>/update">Actualizar datos</a>
+             <a href="/account/logout">Cerrar sesion</a>
             <% } %>
         </div>
         <div class="userActions">

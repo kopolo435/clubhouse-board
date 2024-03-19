@@ -1,12 +1,18 @@
-<header>
-    <a href="/">Inicio</a>
-    <div class="accountOptions">
-        <% if (locals.currentUser) { %>
-            <a href="/account/logout">Cerrar sesion</a>
-            <a href="<%= locals.currentUser.url  %>"><%=locals.currentUser.username  %></a>
-        <% }else{ %>
-            <a href="/account/sign-up">Registrarse</a>
-            <a href="/account/sign-in">Iniciar sesion</a>
-        <% } %>
-    </div>
-</header>
+<div class="headerContainer">
+    <header>
+        <a href="/">Inicio</a>
+        <div class="accountOptions">
+            <% if (locals.currentUser) { %>
+                <a class="userInfo" href="<%= locals.currentUser.url %>">
+                    <div class="profileImg">
+                        <img src="<%= locals.currentUser.img_url%>" alt="">
+                    </div>
+                    <p><%= locals.currentUser.username %></p>
+                </a>
+            <% }else{ %>
+                <a href="/account/sign-up">Registrarse</a>
+                <a href="/account/sign-in">Iniciar sesion</a>
+            <% } %>
+        </div>
+    </header>
+</div>
