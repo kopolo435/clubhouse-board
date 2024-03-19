@@ -36,3 +36,14 @@
   justify-content: space-between;
   max-width: 200px;
 }
+
+.postImgContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.postImg {
+  object-fit: cover;
+  height: 300px;
+  width: 100%;
+}

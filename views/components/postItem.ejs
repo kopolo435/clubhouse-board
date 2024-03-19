@@ -1,14 +1,21 @@
-<% if (locals.currentUser && locals.currentUser.is_member) { %>
- <li class="postItem">
+<li class="postItem">
     <a href="<%= post.url %>" class="postItemCardContent">
         <h2><%= post.title %></h2>
-        <div class="postInfo">
-            <p>Por: <%= post.user.username %></p>
-            <p><%= post.formatted_date %></p>
-        </div>
-        <div class="postContentContainer">
-            <p><%= post.content %></p>
-        </div>
+        <% if (locals.currentUser && locals.currentUser.is_member) { %>
+            <div class="postInfo">
+                <p>Por: <%= post.user.username %></p>
+                <p><%= post.formatted_date %></p>
+            </div>
+        <% } %>
+        <% if (post.img_url) { %>
+            <div class="postImgContainer">
+                <img class="postImg" src="<%= post.img_url %>" alt="">
+            </div>
+        <% } else {%>
+            <div class="postContentContainer">
+                <p><%= post.content %></p>
+            </div>
+        <% } %>
     </a>
     <div class="interactionContainer">
         <%- include("pointCounter",{element:post,post:true}) %>
@@ -20,19 +27,3 @@
         <button class="deletePost" data-id="<%= post.id %>">Borrar post</button>
     <% } %>
 </li>
-<% }else{ %>
-    <li class="postItem">
-        <a href="<%= post.url %>" class="postItemCardContent">
-            <h2><%= post.title %></h2>
-            <div class="postContentContainer">
-                <p><%= post.content %></p>
-            </div>
-        </a>
-        <div class="interactionContainer">
-            <%- include("pointCounter",{element:post,post:true}) %>
-            <div class="numCommentsContainer">
-                <p><%= post.numComments %></p>
-            </div>
-        </div>
-    </li>
-<% } %>
