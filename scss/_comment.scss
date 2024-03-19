@@ -4,7 +4,7 @@
   min-height: 150px;
   background-color: gray;
   padding: 10px;
-  max-width: 500px;
+  max-width: 550px;
 }
 
 .pointsContainerComment {
@@ -15,8 +15,6 @@
 }
 
 .commentContainer {
-  //   display: flex;
-  //   flex-direction: column;
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   gap: 10px;

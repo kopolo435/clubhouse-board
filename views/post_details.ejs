@@ -8,57 +8,82 @@
 </head>
 <body>
     <%- include("./components/header") %>
-    <div class="post">
-        <h1><%= post.title %></h1>
-        <p><%= post.content %></p>
-        <% if (locals.currentUser && locals.currentUser.is_member) { %>
-            <a href="<%= post.user.url %>"><%= post.user.username %></a>
-        <% } %>
-    </div>
-    <% if (locals.currentUser && locals.currentUser.is_member) { %>
-        <div class="newCommentContainer">
-            <form action="" id="newCommentForm">
-                <input type="hidden" name="user" id="userId" value="<%= locals.currentUser.id %>">
-                <input type="hidden" name="post" id="postId" value="<%= post.id %>">
-                <label for="newComment">
-                    <textarea name="newComment" id="newComment"
-                     placeholder="Escribir comentario" cols="30" rows="10" minlength="1" required></textarea>
-                </label>
-                <button type="submit">Escribir comentario</button>
-            </form>
-            <p class="errorText" id="newCommentError"></p>
+    <main class="postDetailsMain">
+        <div class="container">
+            <div class="postDetails">
+                <h1><%= post.title %></h1>
+                <p><%= post.content %></p>
+                <% if (post.img_url) { %>
+                    <div class="postImgContainer">
+                        <img class="postImg" src="<%= post.img_url %>" alt="">
+                    </div>
+                <% } %>
+                <% if (locals.currentUser && locals.currentUser.is_member) { %>
+                    <div class="postInfo">
+                        <p>Por: <a href="post.user.url"><%= post.user.username %></a></p>
+                        <p><%= post.formatted_date %></p>
+                    </div>
+                <% } %>
+                <div class="interactionContainer">
+                    <%- include("components/pointCounter",{element:post,post:true}) %>
+                    <div class="numCommentsContainer">
+                        <p><%= post.numComments %></p>
+                    </div>
+                </div>
+            </div>
         </div>
-    <% }else{ %>
-        <p>Debe iniciar sesion para escribir un comentario</p>
-    <% } %>
-    <form action="" method="get">
-        <fieldset>
-            <legend>Ordenar lista</legend>
-            <div class="sortTypeContainer">
-                <%- include("./components/sortRadio",{id:"dateSort",name:"sortType",
-                value:"date",label:"Fecha de creacion",sortType:sortType}) %>
-                <%- include("./components/sortRadio",{id:"pointSort",name:"sortType",
-                value:"point",label:"Cantidad de puntos",sortType:sortType}) %>
+        <div class="container">
+            <div class="addCommentContainer">
+                <h2>Comentarios</h2>
+                <% if (locals.currentUser && locals.currentUser.is_member) { %>
+                    <div class="newCommentContainer">
+                        <form action="" id="newCommentForm">
+                            <input type="hidden" name="user" id="userId" value="<%= locals.currentUser.id %>">
+                            <input type="hidden" name="post" id="postId" value="<%= post.id %>">
+                            <label for="newComment">
+                                <textarea name="newComment" id="newComment"
+                                 placeholder="Escribir comentario" cols="30" rows="10" minlength="1" required></textarea>
+                            </label>
+                            <button type="submit">Escribir comentario</button>
+                        </form>
+                        <p class="errorText" id="newCommentError"></p>
+                    </div>
+                <% }else{ %>
+                    <p>Debe iniciar sesion para escribir un comentario</p>
+                <% } %>
             </div>
-            <div class="sortOrder">
-                <%- include("./components/sortRadio",{id:"ascendingOrder",name:"sortOrder",
-                value:"1",label:" Ascendente",sortType:sortOrder}) %>
-                <%- include("./components/sortRadio",{id:"descendingOrder",name:"sortOrder",
-                value:"-1",label:" Descendente",sortType:sortOrder}) %>
+        </div>
+        <form action="" method="get" class="sortPostForm">
+            <fieldset class="sortCommentsContainer">
+                <legend>Ordenar lista</legend>
+                <div class="sortTypeContainer">
+                    <%- include("./components/sortRadio",{id:"dateSort",name:"sortType",
+                    value:"date",label:"Fecha de creacion",sortType:sortType}) %>
+                    <%- include("./components/sortRadio",{id:"pointSort",name:"sortType",
+                    value:"point",label:"Cantidad de puntos",sortType:sortType}) %>
+                </div>
+                <div class="sortOrder">
+                    <%- include("./components/sortRadio",{id:"ascendingOrder",name:"sortOrder",
+                    value:"1",label:" Ascendente",sortType:sortOrder}) %>
+                    <%- include("./components/sortRadio",{id:"descendingOrder",name:"sortOrder",
+                    value:"-1",label:" Descendente",sortType:sortOrder}) %>
+                </div>
+                <button type="submit">Ordenar</button>
+            </fieldset>
+        </form>
+        <div class="container">
+            <div class="comments">
+                <% if (comments.length > 0) { %>
+                    <ul>
+                        <% comments.forEach(comment => { %>
+                            <%- include("./components/commentItem",{comment,dashboard:false}) %>
+                        <% }) %>
+                    </ul>
+                <% }else {%>
+                    <p>Sin comentarios, se el primero es escribir uno</p>
+                <% } %>
             </div>
-        </fieldset>
-        <button type="submit">Ordenar</button>
-    </form>
-    <div class="comments">
-        <% if (comments.length > 0) { %>
-            <ul>
-                <% comments.forEach(comment => { %>
-                    <%- include("./components/commentItem",{comment,dashboard:false}) %>
-                <% }) %>
-            </ul>
-        <% }else {%>
-            <p>Sin comentarios, se el primero es escribir uno</p>
-        <% } %>
-    </div>
+        </div>
+    </main>
 </body>
 </html>

@@ -1,0 +1,61 @@
+.postDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  flex: 1;
+  max-width: 550px;
+}
+
+.postDetailsMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.addCommentContainer {
+  flex: 1;
+  max-width: 550px;
+}
+
+#newCommentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  button {
+    align-self: flex-end;
+  }
+
+  textarea {
+    width: 100%;
+    height: 60px;
+    min-height: 60px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+}
+
+.sortCommentsContainer {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  max-width: 550px;
+  gap: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  legend {
+    grid-column: 1/3;
+  }
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.comments {
+  flex: 1;
+  max-width: 550px;
+}
