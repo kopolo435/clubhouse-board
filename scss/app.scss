@@ -1,3 +1,7 @@
-a {
-  color: blue($color: #000000);
-}
+//global export
+@import "./global";
+
+//individual exports
+@import "./postItem";
+@import "./pointCounter";
+@import "./postList.scss";
