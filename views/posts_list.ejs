@@ -27,7 +27,7 @@
         </form>
         <a href="/blog/posts/create">Crear nuevo post</a>
         <% if (posts.length>0) { %>
-            <ul>
+            <ul class="postList">
                 <% posts.forEach(post => { %>
                     <%- include("./components/postItem",{post,dashboard:false}) %>
                 <% }) %>

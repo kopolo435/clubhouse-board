@@ -3,7 +3,7 @@
         <div class="profileImg">
             <img src="<%= comment.user.img_url%>" alt="">
         </div>
-        <%- include("pointCounter",{element:comment}) %>
+        <%- include("pointCounter",{element:comment,post:false}) %>
         <p><%= comment.content %></p>
         <p><%= comment.formatted_date %></p>
         <% if (dashboard && locals.currentUser.is_admin) { %>
