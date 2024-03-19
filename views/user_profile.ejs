@@ -24,6 +24,9 @@
              <a href="/account/new-member">Hacerse miembro</a>
              <a href="/account/logout">Cerrar sesion</a>
             <% } %>
+            <% if (user.is_admin) { %>
+                <a href="/account/admin/dashboard">Admin Dashboard</a>
+            <% } %>
         </div>
         <div class="container">
             <div class="userActions">

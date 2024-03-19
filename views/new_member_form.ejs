@@ -5,11 +5,14 @@
 </head>
 <body>
     <%- include("./components/header") %>
-    <h1>Registrar codigo de miembro</h1>
-    <form action="" method="post">
-        <%- include("textInput",{error:errors.membercode,value:membercode,type:"text",
-        name:"membercode", label:"Codigo de miembro", placeholder:""}) %>
-        <button type="submit">Registrar</button>
-    </form>
+    <div class="container">
+        <form action="" method="post" class="fieldForm">
+            <h1>Registrar codigo de miembro</h1>
+            <p>Registra tu codigo de miembro para poder ver cuando y quienes hicieron que post o comentario</p>
+            <%- include("textInput",{error:errors.membercode,value:membercode,type:"text",
+            name:"membercode", label:"Codigo de miembro", placeholder:""}) %>
+            <button type="submit">Registrar</button>
+        </form>
+    </div>
 </body>
 </html>
