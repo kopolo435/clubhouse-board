@@ -8,12 +8,6 @@
     <div class="container">
         <form action="" method="post" class="fieldForm" enctype="multipart/form-data">
             <h1>Actualizar datos</h1>
-            <div class="profileImgInput">
-                <label for="img">
-                    Imagen de perfil
-                    <input type="file" name="img" id="img">
-                </label>
-            </div>
             <%- include("textInput", {type:"text", label:"Nombre", name:"first_name",
             error:errors.first_name, value:user.first_name, placeholder:"Nombre"}) %>
             <%-include("textInput", {type:"text", label:"Apellido", name:"last_name",
@@ -23,7 +17,11 @@
             <%-include("textInput", {type:"text", label:"Nombre de usuario",
             name:"username", error:errors.username, value:user.username,
             placeholder:"manzanita123"}) %>
-          <button type="submit">Actualizar datos</button>
+            <label for="img" class="addImgContainer">
+                Imagen de perfil
+                <input type="file" name="img" id="img" class="addImgInput">
+            </label>
+          <button type="submit" class="primaryBtn">Actualizar datos</button>
           </form>
     </div>
 </body>

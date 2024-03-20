@@ -20,12 +20,12 @@
                 <li><%= user.is_member ? "Es un miembro" : "No es miembro" %></li>
             </ul>
             <% if (user.id === locals.currentUser.id ) { %>
-             <a href="<%= locals.currentUser.url %>/update">Actualizar datos</a>
-             <a href="/account/new-member">Hacerse miembro</a>
-             <a href="/account/logout">Cerrar sesion</a>
-            <% } %>
-            <% if (user.is_admin) { %>
-                <a href="/account/admin/dashboard">Admin Dashboard</a>
+                <% if (user.is_admin) { %>
+                    <a href="/account/admin/dashboard" class="primaryBtn adminDasboardBtn">Admin Dashboard</a>
+                <% } %>
+             <a href="<%= locals.currentUser.url %>/update" class="primaryBtn updateBtn">Actualizar datos</a>
+             <a href="/account/new-member" class="primaryBtn newMemberBtn">Hacerse miembro</a>
+             <a href="/account/logout" class="primaryBtn logOutBtn">Cerrar sesion</a>
             <% } %>
         </div>
         <div class="container">

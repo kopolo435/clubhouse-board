@@ -47,7 +47,6 @@
 .commentList {
   display: flex;
   flex-direction: column;
-  gap: 40px;
 }
 
 @media (min-width: 600px) {
@@ -68,4 +67,26 @@
       border-radius: 75px;
     }
   }
+}
+
+.newMemberBtn {
+  background-color: var(--gold-300);
+  align-self: flex-start;
+  border: 2px solid var(--gold-700);
+}
+
+.updateBtn {
+  align-self: flex-start;
+}
+
+.logOutBtn {
+  background-color: var(--pink-200);
+  align-self: flex-start;
+  border: 2px solid var(--pink-500);
+}
+
+.adminDasboardBtn {
+  align-self: flex-start;
+  background-color: transparent;
+  border: 2px solid var(--pink-500);
 }

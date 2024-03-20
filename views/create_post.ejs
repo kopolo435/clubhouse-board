@@ -5,17 +5,21 @@
 </head>
 <body>
     <%- include("./components/header") %>
-    <h1>Crear nuevo post</h1>
-    <form action="" method="post" enctype="multipart/form-data">
-        <%- include("textInput",{error:errors.title,name:"title",
-        label:"Titulo del post",type:"text",placeholder:"",value:post.title}) %>
-        <%- include("textareaInput",{error:errors.content,name:"content",value:post.content,
-            label:"Contenido del post",}) %>
-        <label for="img">
-            Agregar imagen al post
-            <input type="file" name="img" id="img">
-        </label>
-        <button type="submit">Crear post</button>
-    </form>
+    <main class="createPostMain">
+        <div class="container">
+            <form action="" method="post" enctype="multipart/form-data" class="fieldForm">
+                <h1>Crear nuevo post</h1>
+                <%- include("textInput",{error:errors.title,name:"title",
+                label:"Titulo del post",type:"text",placeholder:"",value:post.title}) %>
+                <%- include("textareaInput",{error:errors.content,name:"content",value:post.content,
+                    label:"Contenido del post",}) %>
+                <label for="img" class="addImgContainer">
+                    Agregar imagen al post
+                    <input type="file" name="img" id="img" class="addImgInput">
+                </label>
+                <button type="submit" class="primaryBtn">Crear post</button>
+            </form>
+        </div>
+    </main>
 </body>
 </html>

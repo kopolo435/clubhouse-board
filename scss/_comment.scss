@@ -2,7 +2,8 @@
   display: flex;
   gap: 15px;
   min-height: 150px;
-  background-color: gray;
+  background-color: var(--purple-50);
+  border-bottom: 2px solid var(--pink-200);
   padding: 10px;
   max-width: 550px;
 }
@@ -16,7 +17,7 @@
 
 .commentContainer {
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(3, fit-content);
   gap: 10px;
 
   .userInfo {
