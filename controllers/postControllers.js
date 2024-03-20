@@ -55,33 +55,49 @@ module.exports.create_post_post = [
 module.exports.show_post_details = asyncHandler(async (req, res, next) => {
   let post;
   let comments;
-  let { sortType } = req.query;
   let { sortOrder } = req.query;
   // Checks if there is a sort filter for the comments
-  if (req.query.sortType) {
-    if (req.query.sortType === "date") {
+  if (req.query.sortOrder) {
+    if (req.query.sortOrder === "recent") {
       // Sort comments by date
       [post, comments] = await Promise.all([
         Post.findById(req.params.id).populate("user").exec(),
         Comments.find({ post: req.params.id })
-          .sort({ date: Number(req.query.sortOrder) })
+          .sort({ date: -1 })
           .populate("user")
           .exec(),
       ]);
-    } else {
+    } else if (req.query.sortOrder === "oldest") {
+      // Sort comments by date
+      [post, comments] = await Promise.all([
+        Post.findById(req.params.id).populate("user").exec(),
+        Comments.find({ post: req.params.id })
+          .sort({ date: 1 })
+          .populate("user")
+          .exec(),
+      ]);
+    } else if (req.query.sortOrder === "top") {
       // Sort comments by points
       [post, comments] = await Promise.all([
         Post.findById(req.params.id).populate("user").exec(),
         Comments.find({ post: req.params.id })
-          .sort({ points: Number(req.query.sortOrder) })
+          .sort({ points: -1 })
+          .populate("user")
+          .exec(),
+      ]);
+    } else if (req.query.sortOrder === "worst") {
+      // Sort comments by points
+      [post, comments] = await Promise.all([
+        Post.findById(req.params.id).populate("user").exec(),
+        Comments.find({ post: req.params.id })
+          .sort({ points: 1 })
           .populate("user")
           .exec(),
       ]);
     }
   } else {
     // Default sort order by descending date
-    sortType = "date";
-    sortOrder = "-1";
+    sortOrder = "recent";
     [post, comments] = await Promise.all([
       Post.findById(req.params.id).populate("user").exec(),
       Comments.find({ post: req.params.id })
@@ -98,26 +114,36 @@ module.exports.show_post_details = asyncHandler(async (req, res, next) => {
   res.render("post_details", {
     post,
     comments,
-    sortType,
     sortOrder,
   });
 });
 
 module.exports.get_posts_list = asyncHandler(async (req, res, next) => {
   let posts;
-  let { sortType } = req.query;
   let { sortOrder } = req.query;
   // Checks if there is a sort filter for the posts
-  if (req.query.sortType) {
-    if (req.query.sortType === "date") {
+  if (req.query.sortOrder) {
+    if (req.query.sortOrder === "recent") {
       posts = await Post.find()
-        .sort({ date: Number(req.query.sortOrder) })
+        .sort({ date: -1 })
         .populate("numComments")
         .populate("user")
         .exec();
-    } else {
+    } else if (req.query.sortOrder === "oldest") {
       posts = await Post.find()
-        .sort({ points: Number(req.query.sortOrder) })
+        .sort({ date: 1 })
+        .populate("numComments")
+        .populate("user")
+        .exec();
+    } else if (req.query.sortOrder === "top") {
+      posts = await Post.find()
+        .sort({ points: -1 })
+        .populate("numComments")
+        .populate("user")
+        .exec();
+    } else if (req.query.sortOrder === "worst") {
+      posts = await Post.find()
+        .sort({ points: 1 })
         .populate("numComments")
         .populate("user")
         .exec();
@@ -128,12 +154,10 @@ module.exports.get_posts_list = asyncHandler(async (req, res, next) => {
       .populate("numComments")
       .populate("user")
       .exec();
-    sortType = "date";
-    sortOrder = "-1";
+    sortOrder = "recent";
   }
   res.render("posts_list", {
     posts,
-    sortType,
     sortOrder,
   });
 });

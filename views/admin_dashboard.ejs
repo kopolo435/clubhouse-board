@@ -11,22 +11,16 @@
     <h1>Dashboard</h1>
     <main class="adminDashboardMain">
         <form action="" method="get" class="sortPostForm">
-            <fieldset class="sortPostContainer">
-                <legend>Ordenar lista</legend>
-                <div class="sortTypeContainer">
-                    <%- include("./components/sortRadio",{id:"dateSort",name:"sortType",
-                    value:"date",label:"Fecha de creacion",sortType:sortType}) %>
-                    <%- include("./components/sortRadio",{id:"pointSort",name:"sortType",
-                    value:"point",label:"Total de puntos",sortType:sortType}) %>
-                </div>
-                <div class="sortOrder">
-                    <%- include("./components/sortRadio",{id:"ascendingOrder",name:"sortOrder",
-                    value:"1",label:" Ascendente",sortType:sortOrder}) %>
-                    <%- include("./components/sortRadio",{id:"descendingOrder",name:"sortOrder",
-                    value:"-1",label:" Descendente",sortType:sortOrder}) %>
-                </div>
-                <button type="submit">Ordenar</button>
-            </fieldset>
+            <label for="sortOrder">
+                Ordenar post y comentarios
+                <select name="sortOrder" id="sortOrder">
+                    <%- include("./components/sortOption",{value:"recent",text:"Recientes",sortOrder:sortOrder}) %>
+                    <%- include("./components/sortOption",{value:"oldest",text:"Antiguos",sortOrder:sortOrder}) %>
+                    <%- include("./components/sortOption",{value:"top",text:"Mejores",sortOrder:sortOrder}) %>
+                    <%- include("./components/sortOption",{value:"worst",text:"Peores",sortOrder:sortOrder}) %>
+                </select>
+            </label>
+            <button type="submit">Ordenar</button>
         </form>
         <div class="container">
             <div class="userActions">

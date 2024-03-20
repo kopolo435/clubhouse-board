@@ -308,41 +308,53 @@ module.exports.set_admin_post = [
 module.exports.admin_dashboard = asyncHandler(async (req, res, next) => {
   let posts;
   let comments;
-  let { sortType } = req.query;
   let { sortOrder } = req.query;
   // Checks if there is a sort filter for the comments
-  if (req.query.sortType) {
-    if (req.query.sortType === "date") {
+  if (req.query.sortOrder) {
+    if (req.query.sortOrder === "recent") {
       // Sort posts and comments by date
       [posts, comments] = await Promise.all([
         Post.find()
-          .sort({ date: Number(req.query.sortOrder) })
+          .sort({ date: -1 })
           .populate("numComments")
           .populate("user")
           .exec(),
-        Comment.find()
-          .sort({ date: Number(req.query.sortOrder) })
+        Comment.find().sort({ date: -1 }).populate("user").exec(),
+      ]);
+    } else if (req.query.sortOrder === "oldest") {
+      // Sort posts and comments by date
+      [posts, comments] = await Promise.all([
+        Post.find()
+          .sort({ date: 1 })
+          .populate("numComments")
           .populate("user")
           .exec(),
+        Comment.find().sort({ date: 1 }).populate("user").exec(),
       ]);
-    } else {
+    } else if (req.query.sortOrder === "top") {
       // Sort posts and comments by points
       [posts, comments] = await Promise.all([
         Post.find()
-          .sort({ points: Number(req.query.sortOrder) })
+          .sort({ points: -1 })
           .populate("numComments")
           .populate("user")
           .exec(),
-        Comment.find()
-          .sort({ points: Number(req.query.sortOrder) })
+        Comment.find().sort({ points: -1 }).populate("user").exec(),
+      ]);
+    } else if (req.query.sortOrder === "worst") {
+      // Sort posts and comments by points
+      [posts, comments] = await Promise.all([
+        Post.find()
+          .sort({ points: 1 })
+          .populate("numComments")
           .populate("user")
           .exec(),
+        Comment.find().sort({ points: 1 }).populate("user").exec(),
       ]);
     }
   } else {
     // Default sort order by descending date
-    sortType = "date";
-    sortOrder = "-1";
+    sortOrder = "recent";
     [posts, comments] = await Promise.all([
       Post.find()
         .sort({ date: -1 })
@@ -356,7 +368,6 @@ module.exports.admin_dashboard = asyncHandler(async (req, res, next) => {
   res.render("admin_dashboard", {
     comments,
     posts,
-    sortType,
     sortOrder,
   });
 });
