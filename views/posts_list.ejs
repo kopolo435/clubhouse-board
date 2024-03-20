@@ -7,19 +7,23 @@
 <body>
     <%- include("./components/header") %>
     <main class="postListMain">
-        <form action="" method="get" class="sortPostForm">
-            <label for="sortOrder">
-                Ordenar post
-                <select name="sortOrder" id="sortOrder">
-                    <%- include("./components/sortOption",{value:"recent",text:"Recientes",sortOrder:sortOrder}) %>
-                    <%- include("./components/sortOption",{value:"oldest",text:"Antiguos",sortOrder:sortOrder}) %>
-                    <%- include("./components/sortOption",{value:"top",text:"Mejores",sortOrder:sortOrder}) %>
-                    <%- include("./components/sortOption",{value:"worst",text:"Peores",sortOrder:sortOrder}) %>
-                </select>
-            </label>
-            <button type="submit">Ordenar</button>
-        </form>
-        <a href="/blog/posts/create">Crear nuevo post</a>
+        <div class="container">
+            <div class="postsActions">
+                <a href="/blog/posts/create">Crear nuevo post</a>
+                <form action="" method="get" class="sortPostForm">
+                    <label for="sortOrder">
+                        Ordenar post
+                        <select name="sortOrder" id="sortOrder">
+                            <%- include("./components/sortOption",{value:"recent",text:"Recientes",sortOrder:sortOrder}) %>
+                            <%- include("./components/sortOption",{value:"oldest",text:"Antiguos",sortOrder:sortOrder}) %>
+                            <%- include("./components/sortOption",{value:"top",text:"Mejores",sortOrder:sortOrder}) %>
+                            <%- include("./components/sortOption",{value:"worst",text:"Peores",sortOrder:sortOrder}) %>
+                        </select>
+                    </label>
+                    <button type="submit">Ordenar</button>
+                </form>
+            </div>
+        </div>
         <% if (posts.length>0) { %>
             <ul class="postList">
                 <% posts.forEach(post => { %>
