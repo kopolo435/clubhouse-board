@@ -47,9 +47,23 @@
   max-width: 500px;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .sortPostForm {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  button {
+    padding: 2px 5px;
+    border-radius: 5px;
+    border: 2px solid var(--mint-300);
+    background: transparent;
+  }
+}
+
+#addPostLink {
+  min-width: 100px;
 }
