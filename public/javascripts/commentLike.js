@@ -23,7 +23,7 @@ async function upvoteComment(event) {
     console.log(responseData.message, responseData.points);
     updatePointCounter(button, responseData.points);
   } else {
-    console.log(responseData.message);
+    window.location.href = "/account/sign-in";
   }
 }
 
@@ -46,7 +46,7 @@ async function downvoteComment(event) {
     console.log(responseData.message, responseData.points);
     updatePointCounter(button, responseData.points);
   } else {
-    console.log(responseData.message);
+    window.location.href = "/account/sign-in";
   }
 }
 
