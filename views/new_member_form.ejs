@@ -5,14 +5,16 @@
 </head>
 <body>
     <%- include("./components/header") %>
-    <div class="container">
-        <form action="" method="post" class="fieldForm">
-            <h1>Registrar codigo de miembro</h1>
-            <p>Registra tu codigo de miembro para poder ver cuando y quienes hicieron que post o comentario</p>
-            <%- include("textInput",{error:errors.membercode,value:membercode,type:"text",
-            name:"membercode", label:"Codigo de miembro", placeholder:""}) %>
-            <button type="submit" class="primaryBtn">Registrar</button>
-        </form>
-    </div>
+    <main class="p-20">
+        <div class="container">
+            <form action="" method="post" class="fieldForm">
+                <h1>Registrar codigo de miembro</h1>
+                <p>Registra tu codigo de miembro para poder ver cuando y quienes hicieron que post o comentario</p>
+                <%- include("textInput",{error:errors.membercode,value:membercode,type:"text",
+                name:"membercode", label:"Codigo de miembro", placeholder:""}) %>
+                <button type="submit" class="primaryBtn">Registrar</button>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
