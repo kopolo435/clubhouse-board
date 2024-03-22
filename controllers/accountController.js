@@ -94,7 +94,7 @@ module.exports.sign_up_post = [
         });
 
         await user.save();
-        res.redirect("/account/log_in");
+        res.redirect("/account/sign-in");
       });
     }
   }),
@@ -262,7 +262,10 @@ module.exports.update_user_post = [
       res.render("update_user_form", { user, errors: errors.mapped() });
     } else {
       await User.findByIdAndUpdate(req.params.id, user);
-      if (req.file && oldUser.img_url !== "placeholder") {
+      if (
+        req.file &&
+        oldUser.img_url !== "/images/profiles/default-profile.jpg"
+      ) {
         await fs.rm(`public/${oldUser.img_url}`);
       }
       res.redirect(user.url);
