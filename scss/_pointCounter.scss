@@ -3,7 +3,8 @@
   gap: 10px;
 }
 
-.upvotePost {
+.upvotePost,
+.upvoteComment {
   background-color: transparent;
   border: none;
 
@@ -13,7 +14,8 @@
   }
 }
 
-.downvotePost {
+.downvotePost,
+.downvoteComment {
   background-color: transparent;
   border: none;
   span {
@@ -23,11 +25,15 @@
 }
 
 .upvotePost:hover,
-.downvotePost:hover {
+.downvotePost:hover,
+.upvoteComment:hover,
+.downvoteComment :hover {
   transform: scale(110%);
 }
 
 .upvotePost:active,
-.downvotePost:active {
+.downvotePost:active,
+.upvoteComment:active,
+.downvoteComment :active {
   transform: scale(110%);
 }

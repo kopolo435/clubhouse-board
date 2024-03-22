@@ -148,31 +148,39 @@ a {
   gap: 10px;
 }
 
-.upvotePost {
+.upvotePost,
+.upvoteComment {
   background-color: transparent;
   border: none;
 }
-.upvotePost span {
+.upvotePost span,
+.upvoteComment span {
   color: var(--mint-500);
   pointer-events: none;
 }
 
-.downvotePost {
+.downvotePost,
+.downvoteComment {
   background-color: transparent;
   border: none;
 }
-.downvotePost span {
+.downvotePost span,
+.downvoteComment span {
   color: var(--pink-500);
   pointer-events: none;
 }
 
 .upvotePost:hover,
-.downvotePost:hover {
+.downvotePost:hover,
+.upvoteComment:hover,
+.downvoteComment :hover {
   transform: scale(110%);
 }
 
 .upvotePost:active,
-.downvotePost:active {
+.downvotePost:active,
+.upvoteComment:active,
+.downvoteComment :active {
   transform: scale(110%);
 }
 
@@ -267,6 +275,7 @@ a {
 .pointsContainerComment {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   gap: 15px;
 }
