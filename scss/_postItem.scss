@@ -28,6 +28,10 @@
   display: flex;
   gap: 15px;
   color: #5c3b70;
+  a {
+    color: inherit;
+    font-weight: 600;
+  }
 }
 
 .postContentContainer {

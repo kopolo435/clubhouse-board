@@ -1,6 +1,11 @@
 <div class="headerContainer">
     <header>
-        <a href="/">Inicio</a>
+        <a href="/" class="homeLink">
+            <span class="material-symbols-outlined">
+            home
+            </span>
+            Inicio
+        </a>
         <div class="accountOptions">
             <% if (locals.currentUser) { %>
                 <a class="userInfo" href="<%= locals.currentUser.url %>">
@@ -10,8 +15,8 @@
                     <p><%= locals.currentUser.username %></p>
                 </a>
             <% }else{ %>
-                <a href="/account/sign-up">Registrarse</a>
-                <a href="/account/sign-in">Iniciar sesion</a>
+                <a href="/account/sign-up" class="primaryBtn sign-upBtn">Registrarse</a>
+                <a href="/account/sign-in" class="primaryBtn sign-in">Iniciar sesion</a>
             <% } %>
         </div>
     </header>

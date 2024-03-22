@@ -2,3 +2,32 @@
   display: flex;
   gap: 10px;
 }
+
+.upvotePost {
+  background-color: transparent;
+  border: none;
+
+  span {
+    color: var(--mint-500);
+    pointer-events: none;
+  }
+}
+
+.downvotePost {
+  background-color: transparent;
+  border: none;
+  span {
+    color: var(--pink-500);
+    pointer-events: none;
+  }
+}
+
+.upvotePost:hover,
+.downvotePost:hover {
+  transform: scale(110%);
+}
+
+.upvotePost:active,
+.downvotePost:active {
+  transform: scale(110%);
+}

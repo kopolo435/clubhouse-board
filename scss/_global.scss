@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap");
 :root {
   --purple-50: #f9f4fc;
   --purple-100: #e4caf4;
@@ -43,6 +44,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  font-family: "Roboto Serif", serif;
 }
 
 .postListMain {
@@ -69,4 +71,16 @@ body {
 
 .p-20 {
   padding: 20px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+p {
+  font-size: 14px;
+}
+
+a {
+  font-size: 14px;
 }

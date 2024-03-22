@@ -61,7 +61,11 @@ module.exports.show_post_details = asyncHandler(async (req, res, next) => {
     if (req.query.sortOrder === "recent") {
       // Sort comments by date
       [post, comments] = await Promise.all([
-        Post.findById(req.params.id).populate("user").exec(),
+        Post.findById(req.params.id)
+          .populate("numComments")
+          .populate("user")
+          .populate("numComments")
+          .exec(),
         Comments.find({ post: req.params.id })
           .sort({ date: -1 })
           .populate("user")
@@ -70,7 +74,10 @@ module.exports.show_post_details = asyncHandler(async (req, res, next) => {
     } else if (req.query.sortOrder === "oldest") {
       // Sort comments by date
       [post, comments] = await Promise.all([
-        Post.findById(req.params.id).populate("user").exec(),
+        Post.findById(req.params.id)
+          .populate("numComments")
+          .populate("user")
+          .exec(),
         Comments.find({ post: req.params.id })
           .sort({ date: 1 })
           .populate("user")
@@ -79,7 +86,10 @@ module.exports.show_post_details = asyncHandler(async (req, res, next) => {
     } else if (req.query.sortOrder === "top") {
       // Sort comments by points
       [post, comments] = await Promise.all([
-        Post.findById(req.params.id).populate("user").exec(),
+        Post.findById(req.params.id)
+          .populate("numComments")
+          .populate("user")
+          .exec(),
         Comments.find({ post: req.params.id })
           .sort({ points: -1 })
           .populate("user")
@@ -88,7 +98,10 @@ module.exports.show_post_details = asyncHandler(async (req, res, next) => {
     } else if (req.query.sortOrder === "worst") {
       // Sort comments by points
       [post, comments] = await Promise.all([
-        Post.findById(req.params.id).populate("user").exec(),
+        Post.findById(req.params.id)
+          .populate("numComments")
+          .populate("user")
+          .exec(),
         Comments.find({ post: req.params.id })
           .sort({ points: 1 })
           .populate("user")
@@ -99,7 +112,10 @@ module.exports.show_post_details = asyncHandler(async (req, res, next) => {
     // Default sort order by descending date
     sortOrder = "recent";
     [post, comments] = await Promise.all([
-      Post.findById(req.params.id).populate("user").exec(),
+      Post.findById(req.params.id)
+        .populate("numComments")
+        .populate("user")
+        .exec(),
       Comments.find({ post: req.params.id })
         .sort({ date: -1 })
         .populate("user")

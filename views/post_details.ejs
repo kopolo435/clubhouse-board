@@ -27,7 +27,12 @@
                 <div class="interactionContainer">
                     <%- include("components/pointCounter",{element:post,post:true}) %>
                     <div class="numCommentsContainer">
-                        <p><%= post.numComments %></p>
+                        <p>
+                            <span class="material-symbols-outlined">
+                            chat_bubble
+                            </span>
+                            <%= post.numComments %>
+                        </p>
                     </div>
                 </div>
             </div>
