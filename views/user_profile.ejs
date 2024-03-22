@@ -20,7 +20,7 @@
                 <li><%= user.is_member ? "Es un miembro" : "No es miembro" %></li>
             </ul>
             <% if (user.id === locals.currentUser.id ) { %>
-                <% if (user.is_admin) { %>
+                <% if (locals.currentUser.is_admin) { %>
                     <a href="/account/admin/dashboard" class="primaryBtn adminDasboardBtn">Admin Dashboard</a>
                 <% } %>
              <a href="<%= locals.currentUser.url %>/update" class="primaryBtn updateBtn">Actualizar datos</a>

@@ -2,25 +2,35 @@ import { upvoteComment, downvoteComment } from "./commentLike.js";
 
 function createCommentContent(comment) {
   const p = document.createElement("p");
+  p.classList.add("commentContent");
   p.textContent = comment.content;
   return p;
 }
 
 function createPointsContainer(comment) {
   const upvoteButton = document.createElement("button");
+  const upvoteArrow = document.createElement("span");
+  const downvoteArrow = document.createElement("span");
   const downvoteButton = document.createElement("button");
   const pointsContainer = document.createElement("div");
   const pointsValue = document.createElement("p");
 
-  pointsContainer.classList.add("pointsContainer");
+  upvoteArrow.classList.add("material-symbols-outlined");
+  upvoteArrow.textContent = "arrow_upward";
+  downvoteArrow.classList.add("material-symbols-outlined");
+  downvoteArrow.textContent = "arrow_downward";
+  upvoteButton.classList.add("upvoteComment");
+  downvoteButton.classList.add("downvoteComment");
+
+  pointsContainer.classList.add("pointsContainerComment");
   pointsValue.classList.add("pointCounter");
   upvoteButton.dataset.comment_id = comment._id;
   downvoteButton.dataset.comment_id = comment._id;
 
   pointsValue.textContent = "0";
 
-  upvoteButton.textContent = "like";
-  downvoteButton.textContent = "liken't";
+  upvoteButton.appendChild(upvoteArrow);
+  downvoteButton.appendChild(downvoteArrow);
 
   upvoteButton.addEventListener("click", upvoteComment);
   downvoteButton.addEventListener("click", downvoteComment);
@@ -34,11 +44,15 @@ function createPointsContainer(comment) {
 
 function createPosterInfo(user) {
   const container = document.createElement("div");
+  const imgContainer = document.createElement("div");
   const img = document.createElement("img");
   const usernameLink = document.createElement("a");
   usernameLink.textContent = user.username;
   usernameLink.setAttribute("href", user.url);
   img.setAttribute("src", user.img_url);
+
+  container.classList.add("userInfo");
+  imgContainer.classList.add("profileImg");
 
   container.appendChild(img);
   container.appendChild(usernameLink);
@@ -47,6 +61,7 @@ function createPosterInfo(user) {
 
 function createCommentDate(comment) {
   const p = document.createElement("p");
+  p.classList("commentDate");
   p.textContent = comment.formatted_date;
   return p;
 }
@@ -54,6 +69,8 @@ function createCommentDate(comment) {
 function createCommentContainer(comment, user) {
   const li = document.createElement("li");
   const commentContainer = document.createElement("div");
+  li.classList.add("commentItem");
+  commentContainer.classList.add("commentContainer");
 
   li.appendChild(createPointsContainer(comment));
   if (user.is_member) {

@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   email: { type: String, required: true },
   img_url: { type: String, default: "/images/profiles/default-profile.jpg" },
   is_member: { type: Boolean, default: false },
-  is_admin: { type: Boolean, default: true },
+  is_admin: { type: Boolean, default: false },
 });
 
 UserSchema.virtual("url").get(function () {

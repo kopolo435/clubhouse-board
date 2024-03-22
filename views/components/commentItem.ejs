@@ -10,7 +10,9 @@
                 </div>
             <% } %>
             <p class="commentContent"><%= comment.content %></p>
-            <p class="commentDate"><%= comment.formatted_date %></p>
+            <% if (locals.currentUser && locals.currentUser.is_member) { %>
+                <p class="commentDate"><%= comment.formatted_date %></p>
+            <% } %>
         </div>
         <% if (dashboard && locals.currentUser.is_admin) { %>
             <button class="deleteComment primaryBtn" data-id="<%= comment.id %>">Eliminar</button>

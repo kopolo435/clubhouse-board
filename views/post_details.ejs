@@ -40,7 +40,7 @@
         <div class="container">
             <div class="addCommentContainer">
                 <h2>Comentarios</h2>
-                <% if (locals.currentUser && locals.currentUser.is_member) { %>
+                <% if (locals.currentUser) { %>
                     <div class="newCommentContainer">
                         <form action="" id="newCommentForm">
                             <input type="hidden" name="user" id="userId" value="<%= locals.currentUser.id %>">
