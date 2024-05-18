@@ -1,7 +1,3 @@
-# clubhouse-board
-
-Mini project to learn authentication and session handling usign passport
-
 <!--Project Logo and Name-->
 <h1 align="center">
     <!-- project url -->
@@ -38,16 +34,16 @@ Mini project to learn authentication and session handling usign passport
 ## Aspecto en computadora
 
 Pagina de inicio
-![Pagina de inicio en computadoras](src/assets/img/screenshots/homeDesktop.png)
+![Pagina de inicio ](public/images/assets/mainDesktop.png)
+
+Creación de post
+![Creación de post](public/images/assets/newPostDesktop.png)
 
 Detalles de producto
-![Detalles de producto](src/assets/img/screenshots/productDetail.png)
+![Detalles de post](public/images/assets/postDetails.png)
 
-Carro de compras
-![Carro de compras](src/assets/img/screenshots/shoppingCartDesktop.png)
-
-Zona de pago
-![Zona de pago](src/assets/img/screenshots/payZoneDesktop.png)
+Perfil de usuario
+![Perfil de usuario](public/images/assets/profilePage.png)
 
 ## Aspecto en celular
 
