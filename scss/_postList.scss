@@ -5,7 +5,7 @@
 }
 
 .welcomeText {
-  color: var(purple-700);
+  color: var(--purple-700);
   max-width: 500px;
   display: flex;
   flex-direction: column;
@@ -66,12 +66,29 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  color: var(--purple-700);
+
+  label {
+    font-weight: 600;
+  }
+  select {
+    color: var(--purple-700);
+  }
 
   button {
     padding: 2px 5px;
     border-radius: 5px;
     border: 2px solid var(--mint-300);
     background: transparent;
+    color: var(--purple-700);
+  }
+
+  button:hover {
+    border: 2px solid var(--purple-700);
+  }
+
+  button:active {
+    border: 2px solid var(--pink-700);
   }
 }
 

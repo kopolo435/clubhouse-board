@@ -6,6 +6,7 @@
   flex: 1;
   max-width: 550px;
   background-color: #d7b6eb;
+  color: var(--purple-700);
 }
 
 .postDetailsMain {
@@ -20,6 +21,9 @@
   flex: 1;
   max-width: 550px;
   padding: 10px;
+  h2 {
+    color: var(--purple-700);
+  }
 }
 
 #newCommentForm {
@@ -65,4 +69,5 @@
 .comments {
   flex: 1;
   max-width: 550px;
+  color: var(--purple-700);
 }

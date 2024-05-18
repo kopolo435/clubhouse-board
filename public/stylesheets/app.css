@@ -126,6 +126,7 @@ a {
 .interactionContainer {
   display: flex;
   justify-content: space-between;
+  color: var(--purple-700);
   max-width: 200px;
 }
 
@@ -145,7 +146,11 @@ a {
 
 .pointsContainer {
   display: flex;
+  align-items: center;
   gap: 10px;
+}
+.pointsContainer p {
+  font-size: 16px;
 }
 
 .upvotePost,
@@ -191,7 +196,7 @@ a {
 }
 
 .welcomeText {
-  color: var(purple-700);
+  color: var(--purple-700);
   max-width: 500px;
   display: flex;
   flex-direction: column;
@@ -252,12 +257,26 @@ a {
   display: flex;
   align-items: center;
   gap: 10px;
+  color: var(--purple-700);
+}
+.sortPostForm label {
+  font-weight: 600;
+}
+.sortPostForm select {
+  color: var(--purple-700);
 }
 .sortPostForm button {
   padding: 2px 5px;
   border-radius: 5px;
   border: 2px solid var(--mint-300);
   background: transparent;
+  color: var(--purple-700);
+}
+.sortPostForm button:hover {
+  border: 2px solid var(--purple-700);
+}
+.sortPostForm button:active {
+  border: 2px solid var(--pink-700);
 }
 
 #addPostLink {
@@ -372,6 +391,10 @@ header .profileImg img {
   display: flex;
   gap: 15px;
 }
+.accountOptions p {
+  color: var(--purple-700);
+  font-weight: 600;
+}
 
 .sign-upBtn {
   background-color: transparent;
@@ -396,6 +419,7 @@ header .profileImg img {
   flex: 1;
   max-width: 550px;
   background-color: #d7b6eb;
+  color: var(--purple-700);
 }
 
 .postDetailsMain {
@@ -410,6 +434,9 @@ header .profileImg img {
   flex: 1;
   max-width: 550px;
   padding: 10px;
+}
+.addCommentContainer h2 {
+  color: var(--purple-700);
 }
 
 #newCommentForm {
@@ -454,6 +481,7 @@ header .profileImg img {
 .comments {
   flex: 1;
   max-width: 550px;
+  color: var(--purple-700);
 }
 
 .fieldForm {
@@ -461,6 +489,7 @@ header .profileImg img {
   flex-direction: column;
   gap: 15px;
   background-color: var(--purple-50);
+  color: var(--purple-700);
   border: 2px solid var(--purple-500);
   border-radius: 5px;
   padding: 20px;
@@ -533,6 +562,7 @@ header .profileImg img {
   gap: 30px;
   align-items: center;
   padding: 20px;
+  color: var(--purple-700);
 }
 
 .info {
@@ -618,6 +648,7 @@ header .profileImg img {
   align-items: center;
   gap: 20px;
   padding: 20px;
+  color: var(--purple-700);
 }
 
 .deletePost {

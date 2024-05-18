@@ -53,6 +53,10 @@ header {
 .accountOptions {
   display: flex;
   gap: 15px;
+  p {
+    color: var(--purple-700);
+    font-weight: 600;
+  }
 }
 
 .sign-upBtn {
