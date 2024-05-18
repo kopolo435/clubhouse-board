@@ -45,16 +45,6 @@ Detalles de producto
 Perfil de usuario
 ![Perfil de usuario](public/images/assets/profilePage.png)
 
-## Aspecto en celular
-
-Detalles de producto
-
-![Detalles de producto](src/assets/img/screenshots/homeMobile.png)
-
-Formulario de inicio de sesion
-
-![Formulario de inicio de sesion](src/assets/img/screenshots/signInMobile.png)
-
 <!-- Tech Stack -->
 
 ## Tecnologias usadas
