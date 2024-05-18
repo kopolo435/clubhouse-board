@@ -27,9 +27,14 @@ header {
 
 .homeLink {
   display: flex;
-  align-items: end;
+  align-items: center;
   gap: 5px;
   text-decoration: none;
+  span {
+    display: none;
+    font-size: 16px;
+    font-weight: 600;
+  }
 }
 
 .headerContainer {
@@ -53,4 +58,20 @@ header {
 .sign-upBtn {
   background-color: transparent;
   border-color: var(--pink-500);
+}
+
+@media (min-width: 400px) {
+  .homeLink {
+    span {
+      display: inline;
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .homeLink {
+    span {
+      font-size: 24px;
+    }
+  }
 }

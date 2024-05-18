@@ -4,6 +4,17 @@
   gap: 20px;
 }
 
+.welcomeText {
+  color: var(purple-700);
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  h1 {
+    font-size: 24px;
+  }
+}
+
 .sortPostContainer {
   flex: 1;
   display: grid;
