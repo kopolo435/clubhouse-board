@@ -1,7 +1,7 @@
 <!--Project Logo and Name-->
 <h1 align="center">
     <!-- project url -->
-    <a href="https://safe-grape-spark.glitch.me/blog/posts" target="_blank">
+    <a href="https://harvest-slime-piano.glitch.me/blog/posts" target="_blank">
         <!-- project logo -->
         <img src="public/images/assets/logoTransparent.png" width="224px" alt="Logo de ArtDelish">
     <br>
